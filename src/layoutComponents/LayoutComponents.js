@@ -7,7 +7,7 @@ const { Header, Content, Footer, } = Layout;
 const navs = [
   {
     label: "Home",
-    path: "/home",
+    path: "/",
 
   },
   {
@@ -31,7 +31,7 @@ const LayoutComponents = () => (
       <Menu
         mode="horizontal"
         className="header-nav"
-        defaultSelectedKeys={['/home']}
+        defaultSelectedKeys={['/']}
       >
         {navs.map(
           (nav) =>
