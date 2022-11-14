@@ -1,10 +1,10 @@
 import React from 'react'
 
-const AboutFile = () => {
+const About = () => {
   return (
     <>
     ddgd dfasfkhffasfksfasjkfjka
     </>
   )
 }
-export default AboutFile
+export default About
