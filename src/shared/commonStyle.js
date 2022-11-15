@@ -25,7 +25,7 @@ import styled from "styled-components";
 import { COLORS, /* siteThemeColors */ } from "./color";
 export const PageWrap = styled.div`
   padding: 20px 20px 20px 20px;
-  background: ${COLORS.backgroundDark};
+  // background: ${COLORS.backgroundDark};
   height: 100%;
   width: 100%;
 `;

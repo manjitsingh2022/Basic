@@ -1,9 +1,9 @@
-import { Button, Layout, Menu, Row } from "antd";
+import { Button, Col, Layout, Menu, Row } from "antd";
 import { Header } from "antd/lib/layout/layout";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import RoutingComponents from "../routingComponent/Routingcomponents";
-import {  PageWrap } from "../shared/commonStyle";
+import { PageWrap } from "../shared/commonStyle";
 const { Content, Footer } = Layout;
 const navs = [
   {
@@ -14,65 +14,96 @@ const navs = [
     label: "About",
     path: "/about",
   },
-  {
-    label: "LogIn",
-    path: "/logIn",
-  },
 ];
-const LayoutComponents = () => (
-  <>
-    <Layout>
-      {/* <SiderComponents/>  */}
+const LayoutComponents = () => {
+  const [toggle, setToggle] = useState(true);
+  let navigate = useNavigate();
+  // HANDLE LOGOUT EVENT
+  const logout = (e) => {
+    e.preventDefault();
+    console.log("Logout");
+    // CLEAR DATA FROM STORAGE
+    localStorage.clear();
+    sessionStorage.clear();
+    navigate("/home");
+  };
+  return (
+    <>
+      <Layout>
+        {/* <SiderComponents/>  */}
         <Header
           style={{
             position: "sticky",
             zIndex: 1,
             width: "100%",
-            padding: 0,
+           
+           
           }}
         >
           <div className="logo" />
-          <Menu
-          theme="dark"
-            mode="horizontal"
-            className="header-nav"
-            defaultSelectedKeys={["/"]}
-          >
-            {navs.map(
-              (nav) =>
-                (
+
+          {/* <Button  component={Link} to="/login" onClick={() => setToggle(!toggle)}>LogIn</Button>
+            <Button  component={Link} to="#" onClick={logout}>logout</Button> */}
+
+          <Row   >
+            <Col span={12}>
+          
+              <Menu
+                theme="dark"
+                mode="horizontal"
+                className="header-nav"
+                defaultSelectedKeys={["/"]}
+              >
+                {navs.map((nav) => (
                   <Menu.Item key={nav.path}>
                     <Link to={nav.path}>{nav.label}</Link>
                   </Menu.Item>
-                ) 
-            )}
-          </Menu>
+                ))}
+              </Menu>
+            </Col>
+            <Col span={12} style={{textAlign:"end"}}>
+          
+              <Button type="primary">
+                <Link to="/login">
+                  <span>LogIn</span>
+                </Link>
+              </Button>
+
+              <Button type="primary" onClick={logout}>
+                <Link to="/">
+                  <span>logout</span>
+                </Link>
+              </Button>
+            </Col>
+          </Row>
         </Header>
-      <Content className="site-layout">
-        <div
-          className="site-layout-background"
+        <Content className="site-layout">
+          <div
+            className="site-layout-background"
+            style={{
+              minHeight: "100vh",
+              color: "#fff",
+              background: "#26633F",
+            }}
+          >
+            <Row style={{ padding: "30px, 30px" }}>
+              <PageWrap>
+                <RoutingComponents />
+              </PageWrap>
+            </Row>
+          </div>
+        </Content>
+        <Footer
           style={{
-            minHeight: "100vh",
+            textAlign: "center",
+            backgroundColor: "#3b3e43",
             color: "#fff",
           }}
         >
-          <Row style={{ padding: "30px, 30px" }}>
-            <PageWrap>
-              <RoutingComponents />
-            </PageWrap>
-          </Row>
-        </div>
-      </Content>
-      <Footer
-        style={{
-          textAlign: "center",
-          backgroundColor: "#3b3e43",
-          color: "#fff",
-        }}
-      >
-        Ant Design ©2018 Created by Ant UED
-      </Footer>
-    </Layout>
-  </>
-);
+          Ant Design ©2018 Created by Ant UED
+        </Footer>
+      </Layout>
+    </>
+  );
+};
 export default LayoutComponents;

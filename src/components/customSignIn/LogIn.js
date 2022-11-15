@@ -1,59 +1,61 @@
 import { LockOutlined, UserOutlined, MailOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Col, Form, Input, message, Row } from "antd";
+import {
+  Button,
+  Col,
+  Form,
+  Input,
+  message,
+  Row,
+} from "antd";
 import axios from "axios";
 import React, { useState } from "react";
 import { LogInWrap } from "../../shared/commonStyle";
 import { useNavigate } from "react-router-dom";
+// import Parse from "parse/dist/parse.min.js";
 const LogIn = () => {
   const [LogInSubmit, setLogInSubmit] = useState(false);
   let navigate = useNavigate();
   const [form] = Form.useForm();
-  
+
   const onFormSubmit = () => {
     console.log(LogInSubmit, "LogInSubmit");
     form
       .validateFields()
-      .then(async (values ) => {
+      .then(async (values) => {
         // do something with values
         console.log("values", values);
         try {
-          axios.post("http://localhost:8080/login",values).then(response=>{
-            console.log("response",response)
+          axios.post("http://localhost:8080/login", values).then((response) => {
+            console.log("response", response);
             localStorage.setItem("token-info", JSON.stringify(response));
-            const token  =  response.data.token;
+            const token = response.data.token;
             localStorage.setItem("token", token);
             setAuthToken(token);
             setLogInSubmit(true);
-          
-            // window.location.reload();
-            window.location.href = "/home";
-          })
+            // navigate("/home");
+            window.location.refresh();
+          });
         } catch (error) {
           message.error("Login Error!");
           console.log("Error while submitting data!", error);
         } finally {
           setLogInSubmit(false);
-          navigate('/home');
         }
       })
       .catch((e) => {
         console.log(e);
       });
-      
   };
- const setAuthToken = token => {
+  const setAuthToken = (token) => {
     if (token) {
-        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-    else
-        delete axios.defaults.headers.common["Authorization"];
- }
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    } else delete axios.defaults.headers.common["Authorization"];
+  };
 
-
- const token = localStorage.getItem("token");
- if (token) {
-     setAuthToken(token);
- }
+  const token = localStorage.getItem("token");
+  if (token) {
+    setAuthToken(token);
+  }
   // const onFinish = (values) => {
   //   console.log("Received values of form: ", values);
   // };
@@ -70,8 +72,6 @@ const LogIn = () => {
             // }}
             // onFinish={onFinish}
           >
-          
-
             <Form.Item
               name="email"
               // label="Email"
@@ -115,17 +115,18 @@ const LogIn = () => {
             </Form.Item>
 
             <Form.Item>
-              <Button
-               loading={LogInSubmit}
-                type="primary"
-                htmlType="submit"
-                className="login-form-button"
-                onClick={() => onFormSubmit()}
-              >
-                logIn
-              </Button>
-      
-              
+              <>
+                <Button
+                  loading={LogInSubmit}
+                  type="primary"
+                  htmlType="submit"
+                  className="login-form-button"
+                  onClick={() => onFormSubmit()}
+                >
+                  logIn
+                </Button>
+               
+              </>
             </Form.Item>
           </Form>
         </LogInWrap>
