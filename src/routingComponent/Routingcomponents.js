@@ -8,8 +8,8 @@ const RoutingComponents = () => {
     return (
         <>
             <Routes>
-                <Route path="/"  element={<About />} />
-                <Route path="/about"  element={<Home />} />
+                <Route path="/"  element={<Home />} />
+                <Route path="/about"  element={<About />} />
                 <Route path="/login"  element={<LogIn />} />
             </Routes>
         </>

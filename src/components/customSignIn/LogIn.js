@@ -1,12 +1,5 @@
 import { LockOutlined, UserOutlined, MailOutlined } from "@ant-design/icons";
-import {
-  Button,
-  Col,
-  Form,
-  Input,
-  message,
-  Row,
-} from "antd";
+import { Button, Col, Form, Input, message, Row } from "antd";
 import axios from "axios";
 import React, { useState } from "react";
 import { LogInWrap } from "../../shared/commonStyle";
@@ -32,8 +25,8 @@ const LogIn = () => {
             localStorage.setItem("token", token);
             setAuthToken(token);
             setLogInSubmit(true);
-            // navigate("/home");
-            window.location.refresh();
+            navigate("/home?login=true");
+            window.location.reload(false);
           });
         } catch (error) {
           message.error("Login Error!");
@@ -125,7 +118,6 @@ const LogIn = () => {
                 >
                   logIn
                 </Button>
-               
               </>
             </Form.Item>
           </Form>

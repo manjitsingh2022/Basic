@@ -1,6 +1,6 @@
 import { Button, Col, Layout, Menu, Row } from "antd";
 import { Header } from "antd/lib/layout/layout";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import RoutingComponents from "../routingComponent/Routingcomponents";
 import { PageWrap } from "../shared/commonStyle";
@@ -17,7 +17,14 @@ const navs = [
 ];
 const LayoutComponents = () => {
   const [toggle, setToggle] = useState(true);
-  let navigate = useNavigate();
+  useEffect(() => {
+    console.log(localStorage.getItem("token"), "local");
+    if (localStorage.getItem("token")) {
+      setToggle(false);
+    }
+  }, []);
+
+  const navigate = useNavigate();
   // HANDLE LOGOUT EVENT
   const logout = (e) => {
     e.preventDefault();
@@ -25,7 +32,8 @@ const LayoutComponents = () => {
     // CLEAR DATA FROM STORAGE
     localStorage.clear();
     sessionStorage.clear();
-    navigate("/home");
+    navigate("/");
+    setToggle(true);
   };
   return (
     <>
@@ -36,8 +44,6 @@ const LayoutComponents = () => {
             position: "sticky",
             zIndex: 1,
             width: "100%",
-           
-           
           }}
         >
           <div className="logo" />
@@ -45,9 +51,8 @@ const LayoutComponents = () => {
           {/* <Button  component={Link} to="/login" onClick={() => setToggle(!toggle)}>LogIn</Button>
             <Button  component={Link} to="#" onClick={logout}>logout</Button> */}
 
-          <Row   >
+          <Row>
             <Col span={12}>
-          
               <Menu
                 theme="dark"
                 mode="horizontal"
@@ -61,19 +66,21 @@ const LayoutComponents = () => {
                 ))}
               </Menu>
             </Col>
-            <Col span={12} style={{textAlign:"end"}}>
-          
-              <Button type="primary">
-                <Link to="/login">
-                  <span>LogIn</span>
-                </Link>
-              </Button>
-
-              <Button type="primary" onClick={logout}>
-                <Link to="/">
-                  <span>logout</span>
-                </Link>
-              </Button>
+            <Col span={12} style={{ textAlign: "end" }}>
+              {toggle ? (
+                <Button type="primary" >
+                  {console.log(toggle, "toggle")}
+                  <Link to="/login">
+                    <span>LogIn</span>
+                  </Link>
+                </Button>
+              ) : (
+                <Button type="primary" onClick={logout}>
+                  <Link to="/">
+                    <span>logout</span>
+                  </Link>
+                </Button>
+              )}
             </Col>
           </Row>
         </Header>
