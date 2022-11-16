@@ -32,14 +32,14 @@ export const PageWrap = styled.div`
 export const HeaderWrap = styled.div`
   font-family: Roboto;
 `;
-export const LogInWrap = styled.div`
-  height: 440px;
-  width: 440px;
+export const LogWrap = styled.div`
+  min-height: 240px;
+  width: 470px;
   background: #fff;
   // opacity:0.7;   
   right: 120px;
   border-radius: 20px 20px 20px 20px;
-  padding: 100px;
-  margin-top: 100px;
-  margin-bottom: 100px;
+  padding: 40px;
+  margin-top: 50px;
+  // margin-bottom: 100px;
 `;

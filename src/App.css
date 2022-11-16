@@ -38,5 +38,12 @@
 }
 
 .colorWhite{
-  color:#fff;
+  color:#fff !important;
+}
+
+.color-black{
+color: black !important;
+}
+.color-grey{
+color: #b1a49c !important;
 }

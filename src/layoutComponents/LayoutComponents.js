@@ -16,11 +16,11 @@ const navs = [
   },
 ];
 const LayoutComponents = () => {
-  const [toggle, setToggle] = useState(true);
+  const [toggle, setToggle] = useState('');
   useEffect(() => {
     console.log(localStorage.getItem("token"), "local");
     if (localStorage.getItem("token")) {
-      setToggle(false);
+      setToggle(true);
     }
   }, []);
 
@@ -33,7 +33,7 @@ const LayoutComponents = () => {
     localStorage.clear();
     sessionStorage.clear();
     navigate("/");
-    setToggle(true);
+    setToggle(false);
   };
   return (
     <>
@@ -47,10 +47,6 @@ const LayoutComponents = () => {
           }}
         >
           <div className="logo" />
-
-          {/* <Button  component={Link} to="/login" onClick={() => setToggle(!toggle)}>LogIn</Button>
-            <Button  component={Link} to="#" onClick={logout}>logout</Button> */}
-
           <Row>
             <Col span={12}>
               <Menu
@@ -67,8 +63,8 @@ const LayoutComponents = () => {
               </Menu>
             </Col>
             <Col span={12} style={{ textAlign: "end" }}>
-              {toggle ? (
-                <Button type="primary" >
+              {!toggle ? (
+                <Button type="primary">
                   {console.log(toggle, "toggle")}
                   <Link to="/login">
                     <span>LogIn</span>
@@ -77,7 +73,7 @@ const LayoutComponents = () => {
               ) : (
                 <Button type="primary" onClick={logout}>
                   <Link to="/">
-                    <span>logout</span>
+                    <span>Logout</span>
                   </Link>
                 </Button>
               )}
