@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router'
 import LogIn from '../components/customSignIn/LogIn'
 import RegisterForm from '../components/customSignIn/RegisterForm'
 import About from '../pages/about/About'
+import CategoryUser from '../pages/home/CategoryUser'
 import Home from '../pages/home/Home'
 
 const RoutingComponents = () => {
@@ -13,6 +14,7 @@ const RoutingComponents = () => {
                 <Route path="/about"  element={<About />} />
                 <Route path="/login"  element={<LogIn />} />
                 <Route path="/register"  element={<RegisterForm />} />
+                <Route path="/category"  element={<CategoryUser />} />
             </Routes>
         </>
     )

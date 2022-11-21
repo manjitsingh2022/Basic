@@ -14,6 +14,10 @@ const navs = [
     label: "About",
     path: "/about",
   },
+  {
+    label: "Category",
+    path: "/category",
+  },
 ];
 const LayoutComponents = () => {
   const [toggle, setToggle] = useState('');
@@ -28,7 +32,7 @@ const LayoutComponents = () => {
   // HANDLE LOGOUT EVENT
   const logout = (e) => {
     e.preventDefault();
-    console.log("Logout");
+    console.log("Logout",e);
     // CLEAR DATA FROM STORAGE
     localStorage.clear();
     sessionStorage.clear();

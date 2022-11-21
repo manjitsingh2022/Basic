@@ -23,6 +23,8 @@ const RegisterForm = ({}) => {
             .post("http://localhost:8080/register", values)
             .then((response) => {
               console.log("response", response);
+              navigate(`/login`);
+              message.success("Successfully saved data register.");
               window.location.reload(false);
             });
         } catch (error) {
@@ -48,6 +50,8 @@ const RegisterForm = ({}) => {
         <LogWrap>
           <Form
             form={form}
+            className="register-form"
+            autoComplete="off"
             labelCol={{
               span: 8,
             }}
@@ -126,10 +130,23 @@ const RegisterForm = ({}) => {
               name="confirmpassword"
               label="Confirm Password"
               rules={[
+                { required: true, message: "Please confirm your new password" },
                 {
-                  required: true,
-                  message: "Please input your confirmpassword!",
+                  min: 8,
+                  message: "Password needs to be at least 8 characters long",
                 },
+                ({ getFieldValue }) => ({
+                  validator(rule, value) {
+                    if (!value || getFieldValue("password") === value) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject(
+                      new Error(
+                        "The two passwords that you entered do not match!"
+                      )
+                    );
+                  },
+                }),
               ]}
             >
               <Input
@@ -160,8 +177,8 @@ const RegisterForm = ({}) => {
 
             <div
               style={{
-               
-                marginTop: 10,    textAlign: "center"
+                marginTop: 10,
+                textAlign: "center",
               }}
             >
               {`Already have an account?   `}

@@ -1,4 +1,4 @@
-import { LockOutlined, UserOutlined, MailOutlined } from "@ant-design/icons";
+import { LockOutlined,  MailOutlined } from "@ant-design/icons";
 import { Button, Col, Form, Input, message, Row, Typography } from "antd";
 import axios from "axios";
 import React, { useState } from "react";
@@ -10,7 +10,7 @@ const LogIn = () => {
   let navigate = useNavigate();
   const [form] = Form.useForm();
 
-  const onFormSubmit = async() => {
+  const onFormSubmit = async () => {
     console.log(LogInSubmit, "LogInSubmit");
     form
       .validateFields()
@@ -18,16 +18,18 @@ const LogIn = () => {
         // do something with values
         console.log("values", values);
         try {
-        await  axios.post("http://localhost:8080/login", values).then((response) => {
-            console.log("response", response);
-            localStorage.setItem("token-info", JSON.stringify(response));
-            const token = response.data.token;
-            localStorage.setItem("token", token);
-            setAuthToken(token);
-            setLogInSubmit(true);
-            navigate("/?login=true");
-            window.location.reload(false);
-          });
+          await axios
+            .post("http://localhost:8080/login", values)
+            .then((response) => {
+              console.log("response", response);
+              localStorage.setItem("token-info", JSON.stringify(response));
+              const token = response.data.token;
+              localStorage.setItem("token", token);
+              setAuthToken(token);
+              setLogInSubmit(true);
+              navigate("/?login=true");
+              window.location.reload(false);
+            });
         } catch (error) {
           message.error("Login Error!");
           console.log("Error while submitting data!", error);
@@ -65,18 +67,26 @@ const LogIn = () => {
           <Form
             form={form}
             className="login-form"
+            autoComplete="off"
             // initialValues={{
             //   remember: true,
             // }}
             // onFinish={onFinish}
           >
-          <Title level={3} style={{textAlign:"center",color:'#000',marginBottom:'15px',marginTop:'10px', fontWeight:'500'}}>Log In </Title>
-            
-                
+            <Title
+              level={3}
+              style={{
+                textAlign: "center",
+                color: "#000",
+                marginBottom: "15px",
+                marginTop: "10px",
+                fontWeight: "500",
+              }}
+            >
+              Log In{" "}
+            </Title>
             <Form.Item
-            
               name="email"
-          
               // label="Email"
               rules={[
                 {
@@ -88,13 +98,11 @@ const LogIn = () => {
               <Input
                 prefix={<MailOutlined className="site-form-item-icon" />}
                 placeholder="Email"
-
               />
             </Form.Item>
 
             <Form.Item
               name="password"
-             
               // label="Password"
               rules={[
                 {
@@ -126,7 +134,8 @@ const LogIn = () => {
                   type="primary"
                   htmlType="submit"
                   className="login-form-button"
-                  onClick={() => onFormSubmit()}  block
+                  onClick={() => onFormSubmit()}
+                  block
                 >
                   LogIn
                 </Button>
@@ -135,11 +144,11 @@ const LogIn = () => {
 
             <Form.Item
               style={{
-                textAlign: "center"
+                textAlign: "center",
               }}
             >
               {`Need to create an account?   `}
-              <Button style={{ padding: "1" }} onClick={registerForm} >
+              <Button style={{ padding: "1" }} onClick={registerForm}>
                 Sign Up
               </Button>
             </Form.Item>
