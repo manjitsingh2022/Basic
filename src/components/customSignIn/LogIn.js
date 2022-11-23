@@ -1,4 +1,4 @@
-import { LockOutlined,  MailOutlined } from "@ant-design/icons";
+import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Col, Form, Input, message, Row, Typography } from "antd";
 import axios from "axios";
 import React, { useState } from "react";
@@ -6,10 +6,9 @@ import { LogWrap } from "../../shared/commonStyle";
 import { useNavigate } from "react-router-dom";
 const { Title } = Typography;
 const LogIn = () => {
-  const [LogInSubmit, setLogInSubmit] = useState(false);
   let navigate = useNavigate();
   const [form] = Form.useForm();
-
+  const [LogInSubmit, setLogInSubmit] = useState(false);
   const onFormSubmit = async () => {
     console.log(LogInSubmit, "LogInSubmit");
     form
@@ -21,13 +20,14 @@ const LogIn = () => {
           await axios
             .post("http://localhost:8080/login", values)
             .then((response) => {
+              
               console.log("response", response);
               localStorage.setItem("token-info", JSON.stringify(response));
               const token = response.data.token;
               localStorage.setItem("token", token);
               setAuthToken(token);
               setLogInSubmit(true);
-              navigate("/?login=true");
+              navigate("/category");
               window.location.reload(false);
             });
         } catch (error) {
@@ -57,7 +57,7 @@ const LogIn = () => {
   // };
 
   const registerForm = () => {
-    navigate(`/register`);
+    navigate(`/signup`);
   };
   return (
     <Row>

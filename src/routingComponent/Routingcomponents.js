@@ -1,20 +1,24 @@
+import { FormProvider } from 'antd/lib/form/context'
 import React from 'react'
 import { Route, Routes } from 'react-router'
 import LogIn from '../components/customSignIn/LogIn'
+import PrivateRoutePage from '../components/customSignIn/PrivateRoutePage'
 import RegisterForm from '../components/customSignIn/RegisterForm'
 import About from '../pages/about/About'
-import CategoryUser from '../pages/home/CategoryUser'
-import Home from '../pages/home/Home'
+import CategoryUser from '../pages/category/CategoryUser'
+import Home from '../pages/category/Home'
 
 const RoutingComponents = () => {
     return (
         <>
             <Routes>
+                {/* <Route element={ <PrivateRoutePage/>}> */}
                 <Route path="/"  element={<Home />} />
                 <Route path="/about"  element={<About />} />
-                <Route path="/login"  element={<LogIn />} />
-                <Route path="/register"  element={<RegisterForm />} />
                 <Route path="/category"  element={<CategoryUser />} />
+                {/* </Route> */}
+                <Route path="/signup"  element={<RegisterForm />} />
+                <Route path="/login"  element={<LogIn />} />
             </Routes>
         </>
     )

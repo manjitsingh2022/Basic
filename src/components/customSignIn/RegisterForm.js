@@ -1,7 +1,7 @@
 import { LockOutlined, UserAddOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Col, Form, Input, message, Row, Typography } from "antd";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { LogWrap } from "../../shared/commonStyle";
 import { useNavigate } from "react-router-dom";
 const { Title } = Typography;
@@ -38,7 +38,13 @@ const RegisterForm = ({}) => {
         console.log(e);
       });
   };
-
+useEffect(()=>{
+  const auth = localStorage.getItem('user');
+  if(auth){
+    navigate(`/`);
+  }
+ 
+})
   const toSign = () => {
     navigate(`/login`);
   };

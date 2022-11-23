@@ -1,4 +1,5 @@
 import { Button, Col, Layout, Menu, Row } from "antd";
+import Password from "antd/lib/input/Password";
 import { Header } from "antd/lib/layout/layout";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -20,7 +21,7 @@ const navs = [
   },
 ];
 const LayoutComponents = () => {
-  const [toggle, setToggle] = useState('');
+  const [toggle, setToggle] = useState("");
   useEffect(() => {
     console.log(localStorage.getItem("token"), "local");
     if (localStorage.getItem("token")) {
@@ -57,7 +58,7 @@ const LayoutComponents = () => {
                 theme="dark"
                 mode="horizontal"
                 className="header-nav"
-                defaultSelectedKeys={["/"]}
+                // defaultSelectedKeys={["/"]}
               >
                 {navs.map((nav) => (
                   <Menu.Item key={nav.path}>

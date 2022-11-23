@@ -27,7 +27,6 @@ const Home = () => {
 
   const onDelete = (id)=> {
     setDataId(id)
-
     setShowModalDelete(true)
     setLoading(false)
   }
