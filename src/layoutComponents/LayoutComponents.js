@@ -1,4 +1,4 @@
-import { Button, Col, Layout, Menu, Row } from "antd";
+import { Button, Col, Layout, Menu, message, Row } from "antd";
 import Password from "antd/lib/input/Password";
 import { Header } from "antd/lib/layout/layout";
 import React, { useEffect, useState } from "react";
@@ -22,24 +22,29 @@ const navs = [
 ];
 const LayoutComponents = () => {
   const [toggle, setToggle] = useState("");
+  
   useEffect(() => {
     console.log(localStorage.getItem("token"), "local");
+    
     if (localStorage.getItem("token")) {
       setToggle(true);
     }
+   
   }, []);
 
   const navigate = useNavigate();
   // HANDLE LOGOUT EVENT
   const logout = (e) => {
     e.preventDefault();
-    console.log("Logout",e);
+    console.log("Logout", e);
     // CLEAR DATA FROM STORAGE
     localStorage.clear();
     sessionStorage.clear();
+    message.success(`You have successfully logged out!`);
     navigate("/");
     setToggle(false);
   };
+
   return (
     <>
       <Layout>
@@ -52,28 +57,34 @@ const LayoutComponents = () => {
           }}
         >
           <div className="logo" />
-          <Row>
+            <Row>
             <Col span={12}>
+           
               <Menu
                 theme="dark"
                 mode="horizontal"
                 className="header-nav"
                 // defaultSelectedKeys={["/"]}
               >
-                {navs.map((nav) => (
-                  <Menu.Item key={nav.path}>
-                    <Link to={nav.path}>{nav.label}</Link>
-                  </Menu.Item>
-                ))}
+              
+            
+                    {navs.map((nav) => (
+                      <Menu.Item key={nav.path}>
+                        <Link to={nav.path}>{nav.label}</Link>
+                      </Menu.Item>
+                    ))}
+           
+             
               </Menu>
             </Col>
             <Col span={12} style={{ textAlign: "end" }}>
-              {!toggle ? (
+           
+             {!toggle ? (
                 <Button type="primary">
                   {console.log(toggle, "toggle")}
-                  <Link to="/login">
+                    <Link to="/login">
                     <span>LogIn</span>
-                  </Link>
+                  </Link>  
                 </Button>
               ) : (
                 <Button type="primary" onClick={logout}>
@@ -81,9 +92,10 @@ const LayoutComponents = () => {
                     <span>Logout</span>
                   </Link>
                 </Button>
-              )}
+              )} 
             </Col>
           </Row>
+          
         </Header>
         <Content className="site-layout">
           <div

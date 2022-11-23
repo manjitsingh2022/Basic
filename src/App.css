@@ -40,10 +40,19 @@
 .colorWhite{
   color:#fff !important;
 }
-
 .color-black{
 color: black !important;
 }
 .color-grey{
 color: #b1a49c !important;
+}
+.ant-menu-dark .ant-menu-item > span > a:hover{
+  color: rgb(0, 0, 0) !important;
+}
+.ant-menu-dark.ant-menu-horizontal > .ant-menu-item:hover  {
+  background-color:  #fff!important;
+}
+.ant-menu.ant-menu-dark .ant-menu-item-selected{
+  background-color:   #bd61fb !important;
+  color: #000000 !important;
 }

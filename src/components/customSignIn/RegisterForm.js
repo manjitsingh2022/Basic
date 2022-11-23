@@ -38,13 +38,13 @@ const RegisterForm = ({}) => {
         console.log(e);
       });
   };
-useEffect(()=>{
-  const auth = localStorage.getItem('user');
-  if(auth){
-    navigate(`/`);
-  }
+// useEffect(()=>{
+//   const auth = localStorage.getItem('user');
+//   if(auth){
+//     navigate(`/`);
+//   }
  
-})
+// })
   const toSign = () => {
     navigate(`/login`);
   };

@@ -1,7 +1,7 @@
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Col, Form, Input, message, Row, Typography } from "antd";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { LogWrap } from "../../shared/commonStyle";
 import { useNavigate } from "react-router-dom";
 const { Title } = Typography;
@@ -9,7 +9,19 @@ const LogIn = () => {
   let navigate = useNavigate();
   const [form] = Form.useForm();
   const [LogInSubmit, setLogInSubmit] = useState(false);
-  const onFormSubmit = async () => {
+  // const [show, setShow] = useState(false);
+
+  // useEffect(()=>{
+  //   const auth = localStorage.getItem('user');
+  //   if(auth==="user"){
+  //     setShow(false)
+  //     navigate("/categories")
+  //   }if(!auth){
+  //     navigate("/signup")
+  //     setShow(true)
+  //   }
+  // })
+  const onFormSubmit = async() => {
     console.log(LogInSubmit, "LogInSubmit");
     form
       .validateFields()
@@ -17,18 +29,18 @@ const LogIn = () => {
         // do something with values
         console.log("values", values);
         try {
-          await axios
+     await axios
             .post("http://localhost:8080/login", values)
-            .then((response) => {
-              
+            .then((response) =>{
               console.log("response", response);
               localStorage.setItem("token-info", JSON.stringify(response));
               const token = response.data.token;
               localStorage.setItem("token", token);
               setAuthToken(token);
+              message.success(`${response.data.name} is loggged in` )
               setLogInSubmit(true);
               navigate("/category");
-              window.location.reload(false);
+              // window.location.reload(false);
             });
         } catch (error) {
           message.error("Login Error!");
@@ -126,7 +138,7 @@ const LogIn = () => {
                 Forgot password
               </a>
             </Form.Item>
-
+            {/* {show !== "/category" ? <>  </>: null}  */}
             <Form.Item>
               <>
                 <Button
@@ -141,6 +153,7 @@ const LogIn = () => {
                 </Button>
               </>
             </Form.Item>
+            
 
             <Form.Item
               style={{
