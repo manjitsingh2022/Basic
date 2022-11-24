@@ -1,7 +1,7 @@
 import { LockOutlined, UserAddOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Col, Form, Input, message, Row, Typography } from "antd";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { LogWrap } from "../../shared/commonStyle";
 import { useNavigate } from "react-router-dom";
 const { Title } = Typography;
@@ -23,8 +23,8 @@ const RegisterForm = ({}) => {
             .post("http://localhost:8080/register", values)
             .then((response) => {
               console.log("response", response);
-              navigate(`/login`);
               message.success("Successfully saved data register.");
+              navigate(`/login`);
               window.location.reload(false);
             });
         } catch (error) {
@@ -126,7 +126,7 @@ const RegisterForm = ({}) => {
               ]}
             >
               <Input
-                prefix={<LockOutlined className="site-form-item-icon" />}
+                // prefix={<LockOutlined className="site-form-item-icon" />}
                 type="password"
                 placeholder="Password"
               />
@@ -156,7 +156,7 @@ const RegisterForm = ({}) => {
               ]}
             >
               <Input
-                prefix={<LockOutlined className="site-form-item-icon" />}
+                // prefix={<LockOutlined className="site-form-item-icon" />}
                 type="password"
                 placeholder="Confirm password"
               />

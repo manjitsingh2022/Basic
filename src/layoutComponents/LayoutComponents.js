@@ -22,22 +22,20 @@ const navs = [
 ];
 const LayoutComponents = () => {
   const [toggle, setToggle] = useState("");
-  
+
   useEffect(() => {
     console.log(localStorage.getItem("token"), "local");
-    
     if (localStorage.getItem("token")) {
       setToggle(true);
     }
-   
   }, []);
 
   const navigate = useNavigate();
-  // HANDLE LOGOUT EVENT
+  // Handle logout event handle
   const logout = (e) => {
     e.preventDefault();
     console.log("Logout", e);
-    // CLEAR DATA FROM STORAGE
+    // Clear data form storage
     localStorage.clear();
     sessionStorage.clear();
     message.success(`You have successfully logged out!`);
@@ -57,34 +55,28 @@ const LayoutComponents = () => {
           }}
         >
           <div className="logo" />
-            <Row>
+          <Row>
             <Col span={12}>
-           
               <Menu
                 theme="dark"
                 mode="horizontal"
                 className="header-nav"
-                // defaultSelectedKeys={["/"]}
+                defaultSelectedKeys={["/"]}
               >
-              
-            
-                    {navs.map((nav) => (
-                      <Menu.Item key={nav.path}>
-                        <Link to={nav.path}>{nav.label}</Link>
-                      </Menu.Item>
-                    ))}
-           
-             
+                {navs.map((nav) => (
+                  <Menu.Item key={nav.path}>
+                    <Link to={nav.path}>{nav.label}</Link>
+                  </Menu.Item>
+                ))}
               </Menu>
             </Col>
             <Col span={12} style={{ textAlign: "end" }}>
-           
-             {!toggle ? (
+              {!toggle ? (
                 <Button type="primary">
                   {console.log(toggle, "toggle")}
-                    <Link to="/login">
+                  <Link to="/login">
                     <span>LogIn</span>
-                  </Link>  
+                  </Link>
                 </Button>
               ) : (
                 <Button type="primary" onClick={logout}>
@@ -92,10 +84,9 @@ const LayoutComponents = () => {
                     <span>Logout</span>
                   </Link>
                 </Button>
-              )} 
+              )}
             </Col>
           </Row>
-          
         </Header>
         <Content className="site-layout">
           <div

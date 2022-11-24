@@ -10,7 +10,6 @@ const LogIn = () => {
   const [form] = Form.useForm();
   const [LogInSubmit, setLogInSubmit] = useState(false);
   // const [show, setShow] = useState(false);
-
   // useEffect(()=>{
   //   const auth = localStorage.getItem('user');
   //   if(auth==="user"){
@@ -21,6 +20,7 @@ const LogIn = () => {
   //     setShow(true)
   //   }
   // })
+
   const onFormSubmit = async() => {
     console.log(LogInSubmit, "LogInSubmit");
     form
@@ -37,10 +37,10 @@ const LogIn = () => {
               const token = response.data.token;
               localStorage.setItem("token", token);
               setAuthToken(token);
-              message.success(`${response.data.name} is loggged in` )
               setLogInSubmit(true);
               navigate("/category");
-              // window.location.reload(false);
+              message.success(`${response.data.name} is loggged in` )
+              window.location.reload(false);
             });
         } catch (error) {
           message.error("Login Error!");
@@ -61,6 +61,7 @@ const LogIn = () => {
 
   const token = localStorage.getItem("token");
   if (token) {
+    console.log(token,"token")
     setAuthToken(token);
   }
 
