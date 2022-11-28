@@ -2,7 +2,7 @@
 // import ReactDOM from 'react-dom/client';
 // import './index.css';
 // import App from './App';
-import reportWebVitals from './reportWebVitals';
+import reportWebVitals from "./reportWebVitals";
 
 // const root = ReactDOM.createRoot(document.getElementById('root'));
 // root.render(
@@ -17,13 +17,16 @@ import reportWebVitals from './reportWebVitals';
 
 import React from "react";
 import { render } from "react-dom";
-import { BrowserRouter} from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import App from "./App";
+import { AuthProvider } from "./context/AuthProvider";
 const rootElement = document.getElementById("root");
 render(
   <React.StrictMode>
     <BrowserRouter>
-      <App/>
+       <AuthProvider>
+         <App />
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>,
   rootElement

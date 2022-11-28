@@ -1,14 +1,22 @@
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Col, Form, Input, message, Row, Typography } from "antd";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import axios from "../../api/axios";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import AuthContext from "../../context/AuthProvider";
 import { LogWrap } from "../../shared/commonStyle";
 import { useNavigate } from "react-router-dom";
 const { Title } = Typography;
 const LogIn = () => {
-  let navigate = useNavigate();
+  const { setAuth } = useContext(AuthContext);
+  // const userRef = useRef();
+
+  const errRef = useRef();
   const [form] = Form.useForm();
+  // const [errMsg, setErrMsg] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [LogInSubmit, setLogInSubmit] = useState(false);
+  let navigate = useNavigate();
   // const [show, setShow] = useState(false);
   // useEffect(()=>{
   //   const auth = localStorage.getItem('user');
@@ -20,8 +28,13 @@ const LogIn = () => {
   //     setShow(true)
   //   }
   // })
-
-  const onFormSubmit = async() => {
+  // useEffect(() => {
+  //   setErrMsg("");
+  // }, [email, password]);
+  // useEffect(() => {
+  //   userRef.current.focus();
+  // }, [])
+  const onFormSubmit = async () => {
     console.log(LogInSubmit, "LogInSubmit");
     form
       .validateFields()
@@ -29,22 +42,32 @@ const LogIn = () => {
         // do something with values
         console.log("values", values);
         try {
-     await axios
-            .post("http://localhost:8080/login", values)
-            .then((response) =>{
-              console.log("response", response);
-              localStorage.setItem("token-info", JSON.stringify(response));
-              const token = response.data.token;
-              localStorage.setItem("token", token);
-              setAuthToken(token);
-              setLogInSubmit(true);
-              navigate("/category");
-              message.success(`${response.data.name} is loggged in` )
-              window.location.reload(false);
-            });
-        } catch (error) {
+          await axios.post("/login", values).then((response) => {
+            console.log("response", response);
+            // localStorage.setItem("token-info", JSON.stringify({response}));
+            const token = response?.data?.token;
+            localStorage.setItem("token", token);
+            const roles = response?.data?.roles;
+            setAuth({ email, password, roles, token });
+            setAuthToken(token);
+            setLogInSubmit(true);
+            setEmail("");
+            setPassword("");
+            navigate("/");
+            message.success(`${response.data.name} is loggged in`);
+            window.location.reload(false);
+          });
+        } catch (err) {
+          // if (!err?.response) {
+          //   setErrMsg("No Server Response");
+          // } else if (err.response?.status === 409) {
+          //   setErrMsg("Username Taken");
+          // } else {
+          //   setErrMsg("Registration Failed");
+          // }
+          // errRef.current.focus();
           message.error("Login Error!");
-          console.log("Error while submitting data!", error);
+          console.log("Error while submitting data!", err);
         } finally {
           setLogInSubmit(false);
         }
@@ -61,7 +84,7 @@ const LogIn = () => {
 
   const token = localStorage.getItem("token");
   if (token) {
-    console.log(token,"token")
+    console.log(token, "token");
     setAuthToken(token);
   }
 
@@ -77,6 +100,13 @@ const LogIn = () => {
       <Col span={8} />
       <Col span={8}>
         <LogWrap>
+          {/* <p
+            // ref={errRef}
+            className={errMsg ? "errmsg" : "offscreen"}
+            aria-live="assertive"
+          >
+            {errMsg}
+          </p> */}
           <Form
             form={form}
             className="login-form"
@@ -99,7 +129,9 @@ const LogIn = () => {
               Log In{" "}
             </Title>
             <Form.Item
+              value="email"
               name="email"
+              // ref={userRef}
               // label="Email"
               rules={[
                 {
@@ -115,6 +147,8 @@ const LogIn = () => {
             </Form.Item>
 
             <Form.Item
+              // ref={userRef}
+              value="password"
               name="password"
               // label="Password"
               rules={[
@@ -130,15 +164,15 @@ const LogIn = () => {
                 placeholder="Password"
               />
             </Form.Item>
-            <Form.Item>
-              {/* <Form.Item name="remember" valuePropName="checked" noStyle>
+            {/* <Form.Item>
+              <Form.Item name="remember" valuePropName="checked" noStyle>
                 <Checkbox>Remember me</Checkbox>
-              </Form.Item> */}
+              </Form.Item>
 
               <a className="login-form-forgot" href="">
                 Forgot password
               </a>
-            </Form.Item>
+            </Form.Item> */}
             {/* {show !== "/category" ? <>  </>: null}  */}
             <Form.Item>
               <>
@@ -154,7 +188,6 @@ const LogIn = () => {
                 </Button>
               </>
             </Form.Item>
-            
 
             <Form.Item
               style={{

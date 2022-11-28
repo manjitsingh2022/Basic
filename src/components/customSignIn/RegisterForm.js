@@ -1,6 +1,7 @@
 import { LockOutlined, UserAddOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Col, Form, Input, message, Row, Typography } from "antd";
-import axios from "axios";
+// import axios from "axios";
+import axios from "../../api/axios";
 import React, { useState } from "react";
 import { LogWrap } from "../../shared/commonStyle";
 import { useNavigate } from "react-router-dom";
@@ -19,14 +20,12 @@ const RegisterForm = ({}) => {
         // do something with values
         console.log("values", values);
         try {
-          await axios
-            .post("http://localhost:8080/register", values)
-            .then((response) => {
-              console.log("response", response);
-              message.success("Successfully saved data register.");
-              navigate(`/login`);
-              window.location.reload(false);
-            });
+          await axios.post("/register", values).then((response) => {
+            console.log("response", response);
+            message.success("Successfully saved data register.");
+            navigate(`/login`);
+            window.location.reload(false);
+          });
         } catch (error) {
           message.error("Login Error!");
           console.log("Error while submitting data!", error);
@@ -38,13 +37,13 @@ const RegisterForm = ({}) => {
         console.log(e);
       });
   };
-// useEffect(()=>{
-//   const auth = localStorage.getItem('user');
-//   if(auth){
-//     navigate(`/`);
-//   }
- 
-// })
+  // useEffect(()=>{
+  //   const auth = localStorage.getItem('user');
+  //   if(auth){
+  //     navigate(`/`);
+  //   }
+
+  // })
   const toSign = () => {
     navigate(`/login`);
   };

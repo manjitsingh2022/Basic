@@ -1,10 +1,20 @@
-import { Button, Col, Layout, Menu, message, Row } from "antd";
-import Password from "antd/lib/input/Password";
+import {
+  // Avatar,
+  Button,
+  Col,
+  Layout,
+  Menu,
+  message,
+  Row,
+  // Typography,
+} from "antd";
+// import Password from "antd/lib/input/Password";
 import { Header } from "antd/lib/layout/layout";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import RoutingComponents from "../routingComponent/Routingcomponents";
 import { PageWrap } from "../shared/commonStyle";
+// import lifelogo from "../assets/lifelogo.png";
 const { Content, Footer } = Layout;
 const navs = [
   {
@@ -24,7 +34,7 @@ const LayoutComponents = () => {
   const [toggle, setToggle] = useState("");
 
   useEffect(() => {
-    console.log(localStorage.getItem("token"), "local");
+    // console.log(localStorage.getItem("token"), "local");
     if (localStorage.getItem("token")) {
       setToggle(true);
     }
@@ -57,6 +67,14 @@ const LayoutComponents = () => {
           <div className="logo" />
           <Row>
             <Col span={12}>
+              {/* <Link to="/">
+                <Avatar src={lifelogo} size="small" />
+              </Link> */}
+
+              {/* <Typography.Title level={2} className="logo">
+         
+        </Typography.Title> */}
+
               <Menu
                 theme="dark"
                 mode="horizontal"
@@ -73,7 +91,7 @@ const LayoutComponents = () => {
             <Col span={12} style={{ textAlign: "end" }}>
               {!toggle ? (
                 <Button type="primary">
-                  {console.log(toggle, "toggle")}
+                  {/* {console.log(toggle, "toggle")} */}
                   <Link to="/login">
                     <span>LogIn</span>
                   </Link>

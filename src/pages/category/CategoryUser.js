@@ -9,14 +9,16 @@ import {
   Switch,
   Table,
 } from "antd";
-import axios from "axios";
+// import axios from "axios";
+import axios from "../../api/axios";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 // import { useParams } from 'react-router';
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import { MonthDayYearFormat, YearMonthDayFormat } from "../../shared/constants";
+import { MonthDayYearFormat } from "../../shared/constants";
 import EditCategory from "./EditCategory";
 import DeleteModal from "../../components/Modals/DeleteModal";
+// import SelectCategory from "../home/CategorySeclect";
 const CategoryUser = () => {
   // const params = useParams();
   const [form] = Form.useForm();
@@ -27,10 +29,12 @@ const CategoryUser = () => {
   const [showModalEdit, setShowModalEdit] = useState(false);
   const [recordDelete, setRecordDelete] = useState("");
   const [showModalDelete, setShowModalDelete] = useState(false);
+  // const [categorySelect, setCategorySelect] = (true);
+ 
   const getData = () => {
-    axios.get("http://localhost:8080/category/categories").then((response) => {
-      setCategory(response.data.response);
-      console.log("catss", response.data.response);
+    axios.get("/admin/categories").then((response) => {
+      setCategory(response?.data.response);
+      console.log("catss", response?.data?.response);
     });
   };
 
@@ -40,6 +44,7 @@ const CategoryUser = () => {
 
   const onFormSubmit = async () => {
     setLoading(true);
+    // setCategorySelect(false)
     form
       .validateFields()
       .then(async (payload) => {
@@ -47,14 +52,13 @@ const CategoryUser = () => {
         payload.status = true;
         console.log("payload ", payload);
         try {
-          await axios
-            .post("http://localhost:8080/category/store", payload)
-            .then((response) => {
-              setData(response.data);
-              message.success("Successfully saved data category.");
-              form.resetFields();
-              getData();
-            });
+          await axios.post("/admin/store", payload).then((response) => {
+            setData(response.data);
+            message.success("Successfully saved data category.");
+            form.resetFields();
+            getData();
+            // setCategorySelect(true)
+          });
         } catch (error) {
           message.error("category Error!");
           console.log("Error while submitting data!", error);
@@ -82,19 +86,17 @@ const CategoryUser = () => {
     setLoading(true);
     console.log("recordDelete", recordDelete);
     try {
-      await axios
-        .post("http://localhost:8080/category/delete/", { _id: recordDelete })
-        .then((res) => {
-          // setCategory(
-          //   category.filter((i) => {
-          //     return i._id !== categoryRecordDelete;
-          //   })
-          // );
-          getData();
-          setShowModalDelete(false);
-          setLoading(false);
-          message.success("Sucessfully Delete a Category");
-        });
+      await axios.post("/admin/delete/", { _id: recordDelete }).then((res) => {
+        // setCategory(
+        //   category.filter((i) => {
+        //     return i._id !== categoryRecordDelete;
+        //   })
+        // );
+        getData();
+        setShowModalDelete(false);
+        setLoading(false);
+        message.success("Sucessfully Delete a Category");
+      });
     } catch (error) {
       console.log("dsdsddsdsdddsdsdd", error);
       message.error("error while delete content!");
@@ -134,19 +136,19 @@ const CategoryUser = () => {
         </span>
       ),
     },
-    {
-      title: "Status",
-      dataIndex: "status",
-      key: "Status",
-      render: (status, record) => (
-        <Switch
-          // checkedChildren="On"
-          // unCheckedChildren="Off"
-          // checked={status}
-          // onChange={(checked) => handleStatus(checked, record)}
-        />
-      ),
-    },
+    // {
+    //   title: "Status",
+    //   dataIndex: "status",
+    //   key: "Status",
+    //   render: (status, record) => (
+    //     <Switch
+    //     // checkedChildren="On"
+    //     // unCheckedChildren="Off"
+    //     // checked={status}
+    //     // onChange={(checked) => handleStatus(checked, record)}
+    //     />
+    //   ),
+    // },
     {
       title: "Actions",
       key: "operation",
@@ -210,6 +212,13 @@ const CategoryUser = () => {
         </Row>
       </Form>
 
+      <DeleteModal
+        loading={loading}
+        open={showModalDelete}
+        handleCancel={() => setShowModalDelete(false)}
+        handleOk={onConfirmDelete}
+      />
+
       <Table loading={loading} dataSource={category} columns={columns} />
       <EditCategory
         loading={loading}
@@ -220,12 +229,7 @@ const CategoryUser = () => {
         getData={getData}
       />
 
-      <DeleteModal
-        loading={loading}
-        open={showModalDelete}
-        handleCancel={() => setShowModalDelete(false)}
-        handleOk={onConfirmDelete}
-      />
+      {/* <SelectCategory categoryList={category} /> */}
     </>
   );
 };

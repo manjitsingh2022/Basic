@@ -8,7 +8,8 @@ import {
   Space,
   Switch,
 } from "antd";
-import axios from "axios";
+// import axios from "axios";
+import axios from "../../api/axios";
 import moment from "moment";
 import React, { useEffect, } from "react";
 import { MonthDayYearFormat } from "../../shared/constants";
@@ -45,10 +46,11 @@ const EditCategory = ({
           createdDate: moment().format(MonthDayYearFormat),
         };
         const response = await axios.patch(
-          "http://localhost:8080/category/update",
+          "/admin/update",
           payload
         );
         getData()
+        message.success("Category update document!");
         console.log("response", response);
         // form.resetFields();
         console.log("payload", payload);

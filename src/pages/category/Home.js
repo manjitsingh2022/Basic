@@ -1,12 +1,13 @@
 import { Button, Space, Table, Input } from 'antd'
 import axios from 'axios';
+// import axios from "../../api/axios";
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router';
 import DeleteModal from '../../components/Modals/DeleteModal';
 import EditModals from '../../components/Modals/EditModals';
 
 
-const Home = () => {
+const Home1 = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   const [dataId, setDataId] = useState("");
@@ -148,4 +149,4 @@ const Home = () => {
     </>
   )
 }
-export default Home
+export default Home1
