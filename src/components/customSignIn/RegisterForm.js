@@ -1,12 +1,10 @@
 import { LockOutlined, UserAddOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Col, Form, Input, message, Row, Typography } from "antd";
-// import axios from "axios";
 import axios from "../../api/axios";
 import React, { useState } from "react";
 import { LogWrap } from "../../shared/commonStyle";
 import { useNavigate } from "react-router-dom";
 const { Title } = Typography;
-// import Parse from "parse/dist/parse.min.js";
 const RegisterForm = ({}) => {
   const [register, setRegister] = useState(false);
   let navigate = useNavigate();

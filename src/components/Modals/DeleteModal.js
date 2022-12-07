@@ -1,4 +1,4 @@
-import { Button, Modal } from 'antd';
+import { Modal } from 'antd';
 import React, { useState } from 'react';
 const DeleteModal = ({ open,  handleCancel, handleOk ,loading}) => {
   return (

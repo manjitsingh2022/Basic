@@ -5,8 +5,6 @@ import React, { useContext, useState } from "react";
 import AuthContext from "../../context/AuthProvider";
 import { LogWrap } from "../../shared/commonStyle";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import CategorySeclect from "../../pages/home/CategorySeclect";
 const { Title } = Typography;
 const LogIn = () => {
   const dataFeild ={email:"",password:""}

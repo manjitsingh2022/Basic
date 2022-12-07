@@ -11,16 +11,16 @@ import {
 // import axios from "axios";
 import axios from "../../api/axios";
 import moment from "moment";
-import React, { useEffect, } from "react";
+import React, { useEffect } from "react";
 import { MonthDayYearFormat } from "../../shared/constants";
 const EditCategory = ({
   open,
   handleOk,
   handleCancel,
   categoryRecord,
-  loading,getData
+  loading,
+  getData,
 }) => {
-    
   const [form] = Form.useForm();
   useEffect(() => {
     if (categoryRecord) {
@@ -28,7 +28,9 @@ const EditCategory = ({
         _id: categoryRecord._id,
         category: categoryRecord.category ? categoryRecord.category : "",
         status: categoryRecord.status ? categoryRecord.status : "",
-        createdDate: categoryRecord.createdDate ? categoryRecord.createdDate : "",
+        createdDate: categoryRecord.createdDate
+          ? categoryRecord.createdDate
+          : "",
       });
     }
   }, [categoryRecord, form]);
@@ -42,14 +44,11 @@ const EditCategory = ({
           _id: categoryRecord["_id"],
           // _id: record._id,
           category: category,
-          status: status? status: false,
+          status: status ? status : false,
           createdDate: moment().format(MonthDayYearFormat),
         };
-        const response = await axios.patch(
-          "/update",
-          payload
-        );
-        getData()
+        const response = await axios.patch("/update", payload);
+        getData();
         message.success("Category update document!");
         console.log("response", response);
         // form.resetFields();
@@ -59,7 +58,6 @@ const EditCategory = ({
         message.error("error while update document!");
       } finally {
         handleCancel();
-        
       }
     });
   };

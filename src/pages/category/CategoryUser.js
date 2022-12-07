@@ -1,14 +1,4 @@
-import {
-  Button,
-  Col,
-  Form,
-  Input,
-  message,
-  Row,
-  Space,
-  Table,
-} from "antd";
-// import axios from "axios";
+import { Button, Col, Form, Input, message, Row, Space, Table } from "antd";
 import axios from "../../api/axios";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
@@ -21,7 +11,7 @@ import DeleteModal from "../../components/Modals/DeleteModal";
 const CategoryUser = () => {
   // const params = useParams();
   const [form] = Form.useForm();
-  const [ setData] = useState("");
+  const [setData] = useState("");
   const [category, setCategory] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showModalRecord, setShowModalRecord] = useState([]);
@@ -29,7 +19,7 @@ const CategoryUser = () => {
   const [recordDelete, setRecordDelete] = useState("");
   const [showModalDelete, setShowModalDelete] = useState(false);
   // const [categorySelect, setCategorySelect] = (true);
- 
+
   const getData = () => {
     axios.get("/categories").then((response) => {
       setCategory(response?.data.response);

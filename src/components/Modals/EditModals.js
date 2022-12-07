@@ -1,43 +1,38 @@
-import { Button, Form, Input, message, Modal } from 'antd'
-import React, { useEffect, useState } from 'react'
+import { Button, Form, Input, message, Modal } from "antd";
+import React, { useEffect, useState } from "react";
 
 const EditModals = ({ open, handleOk, handleCancel, dataRecord, loading }) => {
-  // console.log("first", dataRecord)
-  
-  const [form] = Form.useForm();
-  useEffect(()=>{
-    if(dataRecord){
-        form.setFieldsValue({
-         title : dataRecord.title ? dataRecord.title : '',
-         body : dataRecord.body ? dataRecord.body : '',
-        });
-    }
- },[dataRecord,form]);
+  // console.log("dataRecord", dataRecord)
 
- const onSaveDocument = () =>{
- 
-    form.validateFields()
-    .then(async (val)=>{
-        console.log("values",val);
-        try{
-        const {title,body} = val;
-       
+  const [form] = Form.useForm();
+  useEffect(() => {
+    if (dataRecord) {
+      form.setFieldsValue({
+        title: dataRecord.title ? dataRecord.title : "",
+        body: dataRecord.body ? dataRecord.body : "",
+      });
+    }
+  }, [dataRecord, form]);
+
+  const onSaveDocument = () => {
+    form.validateFields().then(async (val) => {
+      console.log("values", val);
+      try {
+        const { title, body } = val;
+
         const payload = {
-        
-                title,
-                body,
-               
+          title,
+          body,
         };
-       console.log("payload",payload);
-      }catch(error){
-           console.log("error while save document",error);
-           message.error("error while saving document!");
-      }finally{
+        console.log("payload", payload);
+      } catch (error) {
+        console.log("error while save document", error);
+        message.error("error while saving document!");
+      } finally {
         handleCancel();
       }
-    })
-   
-}
+    });
+  };
 
   return (
     <>
@@ -51,36 +46,27 @@ const EditModals = ({ open, handleOk, handleCancel, dataRecord, loading }) => {
           <Button key="back" onClick={handleCancel}>
             Cancel
           </Button>,
-          <Button key="submit" type="primary" htmlType="submit" onClick={() => onSaveDocument()} >
+          <Button
+            key="submit"
+            type="primary"
+            htmlType="submit"
+            onClick={() => onSaveDocument()}
+          >
             Update
           </Button>,
-
         ]}
       >
-     <Form form={form}  >
-     <Form.Item 
-                    labelCol={{ span: 24 }}
-                    name="title" 
-                    label="Title"
-                >
-                    <Input placeholder={''}/>
-                </Form.Item>
-     <Form.Item 
-                    labelCol={{ span: 24 }}
-                    name="body" 
-                    label="Body"
-                >
-                    <Input placeholder={''} >
-                     
-                    </Input>
-                </Form.Item>
-      
-     </Form>
+        <Form form={form}>
+          <Form.Item labelCol={{ span: 24 }} name="title" label="Title">
+            <Input placeholder={""} />
+          </Form.Item>
+          <Form.Item labelCol={{ span: 24 }} name="body" label="Body">
+            <Input placeholder={""}></Input>
+          </Form.Item>
+        </Form>
       </Modal>
     </>
+  );
+};
 
-
-  )
-}
-
-export default EditModals
+export default EditModals;

@@ -20,12 +20,12 @@ const Home = () => {
   }, []);
   return (
     <>
-        {/* {selectCatgory ?<> <CategorySeclect categoryList={selectCatgory} /></>
+      {/* {selectCatgory ?<> <CategorySeclect categoryList={selectCatgory} /></>
       
         : <About />
       
       } */}
-    <CategorySeclect categoryList={selectCatgory} />
+      <CategorySeclect categoryList={selectCatgory} />
     </>
   );
 };
