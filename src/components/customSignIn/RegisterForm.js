@@ -20,7 +20,7 @@ const RegisterForm = ({}) => {
         // do something with values
         console.log("values", values);
         try {
-          await axios.post("/register", values).then((response) => {
+          await axios.post("/api/auth/signup", values).then((response) => {
             console.log("response", response);
             message.success("Successfully saved data register.");
             navigate(`/login`);
@@ -42,7 +42,6 @@ const RegisterForm = ({}) => {
   //   if(auth){
   //     navigate(`/`);
   //   }
-
   // })
   const toSign = () => {
     navigate(`/login`);
@@ -83,7 +82,7 @@ const RegisterForm = ({}) => {
               Please enter your details
             </p>
             <Form.Item
-              name="name"
+              name="username"
               label="Name"
               rules={[
                 {
@@ -173,7 +172,7 @@ const RegisterForm = ({}) => {
               loading={register}
               type="primary"
               htmlType="submit"
-              className="login-form-button"
+              className="register-form-button"
               onClick={() => onFormSubmit()}
               block
             >

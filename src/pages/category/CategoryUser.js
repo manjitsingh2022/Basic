@@ -6,7 +6,6 @@ import {
   message,
   Row,
   Space,
-  Switch,
   Table,
 } from "antd";
 // import axios from "axios";
@@ -22,7 +21,7 @@ import DeleteModal from "../../components/Modals/DeleteModal";
 const CategoryUser = () => {
   // const params = useParams();
   const [form] = Form.useForm();
-  const [data, setData] = useState("");
+  const [ setData] = useState("");
   const [category, setCategory] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showModalRecord, setShowModalRecord] = useState([]);
@@ -32,7 +31,7 @@ const CategoryUser = () => {
   // const [categorySelect, setCategorySelect] = (true);
  
   const getData = () => {
-    axios.get("/admin/categories").then((response) => {
+    axios.get("/categories").then((response) => {
       setCategory(response?.data.response);
       console.log("catss", response?.data?.response);
     });
@@ -52,7 +51,7 @@ const CategoryUser = () => {
         payload.status = true;
         console.log("payload ", payload);
         try {
-          await axios.post("/admin/store", payload).then((response) => {
+          await axios.post("/store/", payload).then((response) => {
             setData(response.data);
             message.success("Successfully saved data category.");
             form.resetFields();
@@ -86,7 +85,7 @@ const CategoryUser = () => {
     setLoading(true);
     console.log("recordDelete", recordDelete);
     try {
-      await axios.post("/admin/delete/", { _id: recordDelete }).then((res) => {
+      await axios.post("/delete/", { _id: recordDelete }).then((res) => {
         // setCategory(
         //   category.filter((i) => {
         //     return i._id !== categoryRecordDelete;
@@ -110,9 +109,9 @@ const CategoryUser = () => {
     console.log("idddddddddd", _id);
   };
 
-  const handleStatus = (record) => {
-    console.log("handleStatus", record.status);
-  };
+  // const handleStatus = (record) => {
+  //   console.log("handleStatus", record.status);
+  // };
 
   const columns = [
     {

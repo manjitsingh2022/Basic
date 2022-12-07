@@ -46,7 +46,7 @@ const EditCategory = ({
           createdDate: moment().format(MonthDayYearFormat),
         };
         const response = await axios.patch(
-          "/admin/update",
+          "/update",
           payload
         );
         getData()

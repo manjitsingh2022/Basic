@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
+// import { useNavigate  } from "react-router-dom";
 import axios from "../../api/axios";
+// import About from "../about/About";
 import CategorySeclect from "./CategorySeclect";
 const Home = () => {
+  // let navigate = useNavigate();
   const [selectCatgory, setSelectCatgory] = useState([]);
 
-  console.log("ldfsjldsfjfklssdfjsflsdjsdfkls", selectCatgory);
+  console.log("selectCatgory", selectCatgory);
   const getData = async () => {
-    await axios.get("/admin/categories").then((response) => {
-      setSelectCatgory(response?.data.response);
+    await axios.get("/categories").then((response) => {
+      setSelectCatgory(response?.data?.response);
       console.log("catss", response?.data?.response);
     });
   };
@@ -17,7 +20,12 @@ const Home = () => {
   }, []);
   return (
     <>
-      <CategorySeclect categoryList={selectCatgory} />
+        {/* {selectCatgory ?<> <CategorySeclect categoryList={selectCatgory} /></>
+      
+        : <About />
+      
+      } */}
+    <CategorySeclect categoryList={selectCatgory} />
     </>
   );
 };
