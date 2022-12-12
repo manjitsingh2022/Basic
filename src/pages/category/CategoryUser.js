@@ -11,7 +11,7 @@ import DeleteModal from "../../components/Modals/DeleteModal";
 const CategoryUser = () => {
   // const params = useParams();
   const [form] = Form.useForm();
-  const [setData] = useState("");
+  const [data, setData] = useState("");
   const [category, setCategory] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showModalRecord, setShowModalRecord] = useState([]);
@@ -41,7 +41,7 @@ const CategoryUser = () => {
         payload.status = true;
         console.log("payload ", payload);
         try {
-          await axios.post("/store/", payload).then((response) => {
+          await axios.post("/category", payload).then((response) => {
             setData(response.data);
             message.success("Successfully saved data category.");
             form.resetFields();
@@ -147,22 +147,22 @@ const CategoryUser = () => {
         return (
           <Space direction="horizontal">
             <>
-              <Button type="default" onClick={() => onCategoryEdit(record)}>
+              <Button  key="submit" type="primary" onClick={() => onCategoryEdit(record)}>
                 <EditOutlined
                   style={{
                     width: 20,
-                    fontSize: "20px",
                   }}
                 />
               </Button>
               <Button
-                type="default"
+               key="cancel"
+                type="primary"
+                danger
                 onClick={() => onCategoryDelete(record._id)}
               >
                 <DeleteOutlined
                   style={{
                     width: 20,
-                    fontSize: "20px",
                   }}
                 />
               </Button>
@@ -208,7 +208,12 @@ const CategoryUser = () => {
         handleOk={onConfirmDelete}
       />
 
-      <Table loading={loading} dataSource={category} columns={columns} />
+      <Table
+        value={data}
+        loading={loading}
+        dataSource={category}
+        columns={columns}
+      />
       <EditCategory
         loading={loading}
         open={showModalEdit}

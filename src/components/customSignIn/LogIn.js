@@ -26,17 +26,23 @@ const LogIn = () => {
           await axios.post("/api/auth/signin", values).then((response) => {
             // localStorage.setItem("token-info", JSON.stringify({response}));
             const token = response?.data?.accessToken;
-            console.log("response", token);
             localStorage.setItem("token", token);
+            console.log("response", token);
             const userId = response?.data?.id;
             localStorage.setItem("userkey", userId);
-            const roles = response?.data?.roles;
             console.log("userId",userId)
+            const roles = response?.data?.roles;
+            const Usercategory = response?.data?.category;
+            localStorage.setItem("categorykey", Usercategory?Usercategory:"");
+          
+           
             setAuth({ dataFeild, roles, token });
             setAuthToken(token);
             setLogInSubmit(true);
             navigate("/");
             message.success(`${response?.data?.username} is loggged in`);
+console.log(response?.data,"d")
+
             window.location.reload(false);
           });
         } catch (error) {

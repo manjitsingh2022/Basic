@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Form, message, Modal, Select } from "antd";
+import { Button, Form, message, Modal, Select } from "antd";
 import axios from "../../api/axios";
 const CategorySeclect = ({ categoryList }) => {
   const [isModalOpen, setIsModalOpen] = useState(true);
-  console.log("categorySelect", categoryList);
+  // console.log("categorySelect", categoryList);
   const [form] = Form.useForm();
-  useEffect(() => {
-    if (categoryList) {
-      form.setFieldsValue({
-        category: categoryList.category ? categoryList.category : "",
-      });
-    }
-  }, [categoryList, form]);
+  // useEffect(() => {
+  //   if (categoryList) {
+  //     form.setFieldsValue({
+  //       category: categoryList.category ? categoryList.category : "",
+  //     });
+  //   }
+  // }, [categoryList, form]);
   const handleOk = () => {
     setIsModalOpen(true);
     form.validateFields().then(async (val) => {
@@ -38,14 +38,16 @@ const CategorySeclect = ({ categoryList }) => {
       }
     });
   };
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
+
   const onSelectChange = (name, val) => {
     form.setFieldsValue({
       [name]: val,
     });
     console.log("category", form);
+  };
+
+  const onCancel = () => {
+    setIsModalOpen(false);
   };
   return (
     <>
@@ -53,7 +55,17 @@ const CategorySeclect = ({ categoryList }) => {
         title="Select Category"
         open={isModalOpen}
         onOk={handleOk}
-        onCancel={handleCancel}
+        onCancel={onCancel}
+        footer={[
+          <>
+            <Button key={"Cancel"} danger type="primary" onClick={onCancel}>
+              Cancel
+            </Button>
+            <Button  key="submit" type="primary" onClick={handleOk}>
+              Ok
+            </Button>
+          </>
+        ]}
       >
         <Form form={form}>
           <Form.Item
@@ -65,11 +77,11 @@ const CategorySeclect = ({ categoryList }) => {
             rules={[{ required: true, message: "Please select Type" }]}
           >
             <Select
-              onChange={(val) => onSelectChange("user_catgory", val)}
+              onChange={(val) => onSelectChange("category", val)}
               placeholder="Please choose category"
               rules={[{ required: true, message: "Please select Type" }]}
             >
-              {categoryList.map((items, key) => {
+              {categoryList?.map((items, key) => {
                 console.log("first,", items.category);
                 return (
                   <Select.Option key={key} value={items.category}>

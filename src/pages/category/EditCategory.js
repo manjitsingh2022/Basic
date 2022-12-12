@@ -71,7 +71,7 @@ const EditCategory = ({
         onOk={handleOk}
         onCancel={handleCancel}
         footer={[
-          <Button key="back" onClick={handleCancel}>
+          <Button key="back" onClick={handleCancel} danger    type="primary">
             Cancel
           </Button>,
           <Button

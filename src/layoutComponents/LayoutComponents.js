@@ -13,6 +13,7 @@ import { Header } from "antd/lib/layout/layout";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import RoutingComponents from "../routingComponent/Routingcomponents";
+import { SideMenu } from "../routingComponent/SideMenu";
 import { PageWrap } from "../shared/commonStyle";
 // import lifelogo from "../assets/lifelogo.png";
 const { Content, Footer } = Layout;
@@ -111,14 +112,28 @@ const LayoutComponents = () => {
             className="site-layout-background"
             style={{
               minHeight: "100vh",
-              color: "#fff",
-              background: "#26633F",
+              color: "#000",
+              background: "#F5F5F5",
             }}
           >
-            <Row style={{ padding: "30px, 30px" }}>
+            <Row /* style={{ padding: "30px, 30px",border:'1px solid #000' }} */
+            >
+               {/* <Col span={4} >
               <PageWrap>
-                <RoutingComponents />
+              <SideMenu/>
               </PageWrap>
+              </Col> */}
+              <Col span={20} offset={2}>
+                <PageWrap>
+                  <RoutingComponents />
+                </PageWrap>
+              </Col>
+             
+              {/* <Col  span={18} style={{marginLeft:20}}> */}
+              {/* <PageWrap> */}
+              {/* <RoutingComponents /> */}
+              {/* </PageWrap> */}
+              {/* </Col> */}
             </Row>
           </div>
         </Content>

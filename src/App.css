@@ -56,3 +56,14 @@ color: #b1a49c !important;
   background-color:   #bd61fb !important;
   color: #000000 !important;
 }
+.metaCustom{
+  justify-content: center !important;
+ 
+}
+.customer--address {
+  display: block;
+  width: 160px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
