@@ -1,4 +1,4 @@
-import { LockOutlined, UserAddOutlined, MailOutlined } from "@ant-design/icons";
+import { LockOutlined, UserAddOutlined, MailOutlined,PhoneOutlined } from "@ant-design/icons";
 import { Button, Col, Form, Input, message, Row, Typography } from "antd";
 import axios from "../../api/axios";
 import React, { useState } from "react";
@@ -52,7 +52,7 @@ const RegisterForm = ({}) => {
         <LogWrap>
           <Form
             form={form}
-            className="register-form"
+            className="register-form formCustom"
             autoComplete="off"
             labelCol={{
               span: 8,
@@ -65,7 +65,7 @@ const RegisterForm = ({}) => {
               level={3}
               style={{
                 textAlign: "center",
-                color: "#000",
+                color: "#fff",
                 marginBottom: "15px",
                 marginTop: "10px",
                 fontWeight: "500",
@@ -74,8 +74,7 @@ const RegisterForm = ({}) => {
               ACCESS ACCOUNT
             </Title>
             <p
-              style={{ fontWeight: "500", textAlign: "center" }}
-              className="color-black"
+              style={{ fontWeight: "500", textAlign: "center", color: "#fff", }}
             >
               Please enter your details
             </p>
@@ -122,7 +121,7 @@ const RegisterForm = ({}) => {
               ]}
             >
               <Input
-                // prefix={<LockOutlined className="site-form-item-icon" />}
+                 prefix={<LockOutlined />}
                 type="password"
                 placeholder="Password"
               />
@@ -152,7 +151,7 @@ const RegisterForm = ({}) => {
               ]}
             >
               <Input
-                // prefix={<LockOutlined className="site-form-item-icon" />}
+                 prefix={<LockOutlined />}
                 type="password"
                 placeholder="Confirm password"
               />
@@ -163,9 +162,9 @@ const RegisterForm = ({}) => {
               label="Phone"
               rules={[{ required: true, message: "Phone Number is required" }]}
             >
-              <Input type="tel" placeholder="Phone Number" />
+              <Input type="tel" placeholder="Phone Number"  prefix={ <PhoneOutlined />} />
             </Form.Item>
-
+           
             <Button
               loading={register}
               type="primary"
@@ -183,9 +182,9 @@ const RegisterForm = ({}) => {
                 textAlign: "center",
               }}
             >
-              {`Already have an account?   `}
-              <Button style={{ padding: "1" }} onClick={toSign}>
-                Sign in
+            {/* {<span>Already have an account?</span>}  */}
+              <Button type='link' style={{ padding: "1" }} onClick={()=>navigate(`/login`)()}>
+                 Sign in
               </Button>
             </div>
           </Form>

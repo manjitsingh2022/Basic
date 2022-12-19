@@ -1,10 +1,13 @@
 import { Card, Col, Input, message, Row, Typography } from "antd";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "../../../api/axios";
+const imageUrl = "`http://localhost:8080/upload`";
 const { Meta } = Card;
 const { Text } = Typography;
 const AdvertisementList = () => {
   const [list, setList] = useState([]);
+
   const getData = async () => {
     try {
       await axios.get("/advertisements").then((response) => {
@@ -20,21 +23,21 @@ const AdvertisementList = () => {
   }, []);
 
   const searchItems = (value) => {
-    if(value === ""){
+    if (value === "") {
       getData();
-    }else{
+    } else {
       const filteredData = list?.filter((item) =>
-      item.name.toLowerCase().includes(value)
+        item.name.toLowerCase().includes(value)
       );
       console.log("searchTerms", filteredData);
-    setList(filteredData);
+      setList(filteredData);
     }
     console.log("value", value);
   };
 
   return (
     <>
-      <Row gutter={[16, 16]} style={{marginTop:"10px"}}>
+      <Row gutter={[16, 16]} style={{ marginTop: "10px" }}>
         <Col span={5}>
           {list && (
             <div>
@@ -48,29 +51,32 @@ const AdvertisementList = () => {
         <Col span={19}>
           <Row gutter={[16, 16]}>
             {list?.map((items, index) => {
+            
               return (
                 <>
                   <Col span={6} key={index} style={{ display: "flex" }}>
-                    <Card size="default"
+                    <Card
+                      size="default"
                       hoverable
                       style={{
                         width: "auto",
                       }}
                       cover={
                         <img
-                          style={{
-                            minHeight: 300,
-                          }}
                           alt="example"
-                          src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                          style={{
+                            minHeight: 180,maxHeight:200
+                          }}
+                          src={`http://localhost:8080/${items.image}`}
                         />
                       }
+                      // src={`${process.env.NODE_APP_URL}${items.image}`} />}
                     >
                       <Meta
                         className="metaCustom"
                         title={items.name}
                         description={
-                          <Text className="customer--address"  >
+                          <Text className="customer--address">
                             {items.description}
                           </Text>
                         }

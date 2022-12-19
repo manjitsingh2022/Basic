@@ -38,13 +38,12 @@ export const HeaderWrap = styled.div`
 export const LogWrap = styled.div`
   min-height: 240px;
   width: 470px;
-  background: #fff;
+  background: #1b1b1b;
   // opacity:0.7;   
   right: 120px;
   border-radius: 20px 20px 20px 20px;
   padding: 40px;
   margin-top: 50px;
-
   // margin-bottom: 100px;
 `;
 

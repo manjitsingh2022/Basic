@@ -67,3 +67,5 @@ color: #b1a49c !important;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.formCustom .ant-form-item-label > label { color: #fff !important;}
