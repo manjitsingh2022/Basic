@@ -37,8 +37,7 @@ export const Advertisement = () => {
           setSuccess("Image upload successfully");
           message.success("Image upload successfully");
         }
-        const images = res.data;
-        console.log("dddldldldldld", images);
+       
         const { name, description, image } = val;
         const payload = {
           name: name ? name : "",

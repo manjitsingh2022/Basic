@@ -19,14 +19,19 @@ import React from "react";
 import { render } from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-import { AuthProvider } from "./context/AuthProvider";
+// import { AuthProvider } from "./context/AuthProvider";
+import { Provider } from "react-redux";
+import store from "./state/store";
 const rootElement = document.getElementById("root");
 render(
   <React.StrictMode>
-    <BrowserRouter>
-       <AuthProvider>
-         <App />
-      </AuthProvider>
+    <BrowserRouter >
+       {/* <AuthProvider> */}
+       {/* <Provider store={store}> */}
+       <App />
+       {/* </Provider> */}
+       
+      {/* </AuthProvider> */}
     </BrowserRouter>
   </React.StrictMode>,
   rootElement

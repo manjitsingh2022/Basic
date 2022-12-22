@@ -1,8 +1,7 @@
 import { Card, Col, Input, message, Row, Typography } from "antd";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "../../../api/axios";
-const imageUrl = "`http://localhost:8080/upload`";
+import CheckBoxFilter from "./CheckBoxFilter";
 const { Meta } = Card;
 const { Text } = Typography;
 const AdvertisementList = () => {
@@ -25,14 +24,15 @@ const AdvertisementList = () => {
   const searchItems = (value) => {
     if (value === "") {
       getData();
-    } else {
+    } else if (value) {
       const filteredData = list?.filter((item) =>
         item.name.toLowerCase().includes(value)
       );
       console.log("searchTerms", filteredData);
       setList(filteredData);
+    } else {
+      console.log("value", value);
     }
-    console.log("value", value);
   };
 
   return (
@@ -40,32 +40,33 @@ const AdvertisementList = () => {
       <Row gutter={[16, 16]} style={{ marginTop: "10px" }}>
         <Col span={5}>
           {list && (
-            <div>
+            <>
               <Input
                 placeholder="Search Advertisement"
                 onChange={(e) => searchItems(e.target.value.toLowerCase())}
               />
-            </div>
+              <CheckBoxFilter list={list} searchItems={searchItems} />
+            </>
           )}
         </Col>
         <Col span={19}>
-          <Row gutter={[16, 16]}>
+          <Row   
+            gutter={[16, 24]}
+          >
             {list?.map((items, index) => {
-            
               return (
                 <>
-                  <Col span={6} key={index} style={{ display: "flex" }}>
+                  <Col span={6} className="gutter-row" key={index}>
                     <Card
                       size="default"
                       hoverable
-                      style={{
-                        width: "auto",
-                      }}
+                     
                       cover={
                         <img
                           alt="example"
                           style={{
-                            minHeight: 180,maxHeight:200
+                            minHeight: 150,
+                            maxHeight: 150,
                           }}
                           src={`http://localhost:8080/${items.image}`}
                         />

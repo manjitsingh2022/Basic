@@ -1,20 +1,14 @@
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Col, Form, Input, message, Row, Typography } from "antd";
 import axios from "../../api/axios";
-import React, { useContext, useState } from "react";
-import AuthContext from "../../context/AuthProvider";
+import React, {  useState } from "react";
 import { LogWrap } from "../../shared/commonStyle";
 import { useNavigate } from "react-router-dom";
 const { Title } = Typography;
 const LogIn = () => {
-  const dataFeild = { email: "", password: "" };
-  const { setAuth } = useContext(AuthContext);
   const [form] = Form.useForm();
-
   const [LogInSubmit, setLogInSubmit] = useState(false);
-
   let navigate = useNavigate();
-
   const onFormSubmit = async () => {
     console.log(LogInSubmit, "LogInSubmit");
     form
@@ -31,14 +25,15 @@ const LogIn = () => {
             const userId = response?.data?.id;
             localStorage.setItem("userkey", userId);
             console.log("userId", userId);
-            const roles = response?.data?.roles;
+            const UserRole = response?.data?.roles;
+            localStorage.setItem("rolekey",UserRole)
+            console.log("roles",UserRole)
             const Usercategory = response?.data?.category;
             localStorage.setItem(
               "categorykey",
               Usercategory ? Usercategory : ""
             );
 
-            setAuth({ dataFeild, roles, token });
             setAuthToken(token);
             setLogInSubmit(true);
             navigate("/");
