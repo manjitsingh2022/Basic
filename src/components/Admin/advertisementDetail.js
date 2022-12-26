@@ -1,156 +1,88 @@
-import React, { useState } from 'react';
-import { Form, Input, InputNumber, Popconfirm, Table, Typography } from 'antd';
-const originData = [];
-for (let i = 0; i < 10; i++) {
-  originData.push({
-    key: i.toString(),
-    name: `Edrward ${i}`,
-    address: `London Park no. ${i}`,
-  });
-}
-const EditableCell = ({
-  editing,
-  dataIndex,
-  title,
-  inputType,
-  record,
-  index,
-  children,
-  ...restProps
-}) => {
-  const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
-  return (
-    <td {...restProps}>
-      {editing ? (
-        <Form.Item
-          name={dataIndex}
-          style={{
-            margin: 0,
-          }}
-          rules={[
-            {
-              required: true,
-              message: `Please Input ${title}!`,
-            },
-          ]}
-        >
-          {inputNode}
-        </Form.Item>
-      ) : (
-        children
-      )}
-    </td>
-  );
-};
+import React, { useState, useEffect } from "react";
+import { Button, message, Space, Table } from "antd";
+import axios from "../../api/axios";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 const AdvertisementDetail = () => {
-  const [form] = Form.useForm();
-  const [data, setData] = useState(originData);
-  const [editingKey, setEditingKey] = useState('');
-  const isEditing = (record) => record.key === editingKey;
-  const edit = (record) => {
-    form.setFieldsValue({
-      name: '',
-      ...record,
-    });
-    setEditingKey(record.key);
-  };
-  const cancel = () => {
-    setEditingKey('');
-  };
-  const save = async (key) => {
+  const [adsRecord, setAdsRecord] =useState([]);
+  // console.log("adsRecord", adsRecord);
+  const getData = async () => {
     try {
-      const row = await form.validateFields();
-      const newData = [...data];
-      const index = newData.findIndex((item) => key === item.key);
-      if (index > -1) {
-        const item = newData[index];
-        newData.splice(index, 1, {
-          ...item,
-          ...row,
-        });
-        setData(newData);
-        setEditingKey('');
-      } else {
-        newData.push(row);
-        setData(newData);
-        setEditingKey('');
-      }
-    } catch (errInfo) {
-      console.log('Validate Failed:', errInfo);
+      await axios.get("/advertisements").then((response) => {
+        setAdsRecord(response?.data?.response);
+        console.log("adsRecord", response?.data?.response);
+      });
+    } catch (error) {
+      message.error("Select category error");
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const onConfirmDelete = async (_id) => {
+    console.log("delte",_id)
+    try {
+      await axios.post("/delete/", { _id: _id }).then((res) => {
+        getData();
+        message.success("Sucessfully Delete a Category");
+      });
+    } catch (error) {
+      console.log("dsdsddsdsdddsdsdd", error);
+      message.error("error while delete content!");
     }
   };
   const columns = [
     {
-      title: 'name',
-      dataIndex: 'name',
-      width: '25%',
-      editable: true,
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
     },
-   
+    
     {
-      title: 'Description',
-      dataIndex: 'address',
-      width: '40%',
-      editable: true,
+      title: "Category",
+      dataIndex: "category",
+      key: "category",
     },
     {
-      title: 'operation',
-      dataIndex: 'operation',
+      title: "Actions",
+      key: "operation",
+      fixed: "right",
+      width: "80px",
       render: (_, record) => {
-        const editable = isEditing(record);
-        return editable ? (
-          <span>
-            <Typography.Link
-              onClick={() => save(record.key)}
-              style={{
-                marginRight: 8,
-              }}
-            >
-              Save
-            </Typography.Link>
-            <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-              <a>Cancel</a>
-            </Popconfirm>
-          </span>
-        ) : (
-          <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
-            Edit
-          </Typography.Link>
+        return (
+          <Space direction="horizontal">
+            <>
+              {/* <Button  key="submit" type="primary" onClick={() => onCategoryEdit(record)}>
+                <EditOutlined
+                  style={{
+                    width: 20,
+                  }}
+                />
+              </Button> */}
+              <Button
+               key="cancel"
+                type="primary"
+                danger
+                onClick={() => onConfirmDelete(record._id)}
+              >
+                <DeleteOutlined
+                  style={{
+                    width: 20,
+                  }}
+                />
+              </Button>
+            </>
+          </Space>
         );
       },
     },
   ];
-  const mergedColumns = columns.map((col) => {
-    if (!col.editable) {
-      return col;
-    }
-    return {
-      ...col,
-      onCell: (record) => ({
-        record,
-        dataIndex: col.dataIndex,
-        title: col.title,
-        editing: isEditing(record),
-      }),
-    };
-  });
+
   return (
-    <Form form={form} component={false}>
-      <Table
-        components={{
-          body: {
-            cell: EditableCell,
-          },
-        }}
-        bordered
-        dataSource={data}
-        columns={mergedColumns}
-        rowClassName="editable-row"
-        pagination={{
-          onChange: cancel,
-        }}
-      />
-    </Form>
+    <>
+      <Table dataSource={adsRecord} columns={columns} />
+    </>
   );
 };
 export default AdvertisementDetail;

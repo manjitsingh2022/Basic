@@ -26,7 +26,7 @@ export const Home = () => {
     <>
       {/* first time user login and choice a category */}
       {!userCategory ? <CategorySeclect categoryList={selectCatgory} /> : null}
-      <AdvertisementList/>
+      <AdvertisementList  categoryList={selectCatgory} />
     </>
   );
 };

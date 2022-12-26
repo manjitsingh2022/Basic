@@ -11,7 +11,6 @@ import { Header } from "antd/lib/layout/layout";
 import React, { useEffect, useState } from "react";
 import { Link, Outlet} from "react-router-dom";
 import ProfileMenu from "../pages/profileMenu/index.js";
-import { RequireAuth } from "../routingComponent/requireAuth.js";
 // import { SideMenu } from "../routingComponent/SideMenu";
 import { PageWrap } from "../shared/commonStyle";
 // import lifelogo from "../assets/lifelogo.png";
@@ -50,7 +49,6 @@ const LayoutComponents = () => {
  
   return (
     <>
-     <RequireAuth>
       <Layout>
         <Header
           style={{
@@ -111,7 +109,6 @@ const LayoutComponents = () => {
           Ant Design ©2018 Created by Ant UED
         </Footer>
       </Layout>
-          </RequireAuth>
     </>
   );
 };

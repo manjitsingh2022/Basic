@@ -10,15 +10,20 @@ import CategoryUser from "./pages/category/CategoryUser";
 import About from "./pages/about/About";
 import AdvertisementDetail from "./components/Admin/advertisementDetail";
 const App = () => {
+  
+  
   return (
     <>
       <Routes>
         <Route path="/" element={<LayoutComponents />}>
-          <Route path="/category" element={<CategoryUser />} />
+          <Route path="/category"  element={<CategoryUser />} />
           <Route path="/home" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/advertisement" element={<Advertisement />} />
-          <Route path="/advertisementDetail" element={<AdvertisementDetail />} />
+          <Route path="/advertisementDetail" element={<AdvertisementDetail />} >
+
+            
+          </Route>
         </Route>
         <Route path="/signup" element={<RegisterForm />} />
         <Route path="/login" element={<LogIn />} />

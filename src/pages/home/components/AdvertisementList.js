@@ -4,7 +4,8 @@ import axios from "../../../api/axios";
 import CheckBoxFilter from "./CheckBoxFilter";
 const { Meta } = Card;
 const { Text } = Typography;
-const AdvertisementList = () => {
+const AdvertisementList = ({ categoryList }) => {
+  console.log("selectCatgoryselectCatgory",categoryList)
   const [list, setList] = useState([]);
 
   const getData = async () => {
@@ -45,7 +46,7 @@ const AdvertisementList = () => {
                 placeholder="Search Advertisement"
                 onChange={(e) => searchItems(e.target.value.toLowerCase())}
               />
-              <CheckBoxFilter list={list} searchItems={searchItems} />
+              <CheckBoxFilter categoryList={categoryList} searchItems={searchItems} />
             </>
           )}
         </Col>
