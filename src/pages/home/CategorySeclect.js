@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Form, message, Modal, Select } from "antd";
 import axios from "../../api/axios";
 const CategorySeclect = ({ categoryList }) => {

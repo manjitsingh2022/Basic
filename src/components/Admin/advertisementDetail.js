@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, message, Space, Table } from "antd";
 import axios from "../../api/axios";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import {  DeleteOutlined } from "@ant-design/icons";
 const AdvertisementDetail = () => {
   const [adsRecord, setAdsRecord] =useState([]);
   // console.log("adsRecord", adsRecord);
@@ -21,9 +21,10 @@ const AdvertisementDetail = () => {
   }, []);
 
   const onConfirmDelete = async (_id) => {
-    console.log("delte",_id)
+    console.log("delete",_id)
     try {
-      await axios.post("/delete/", { _id: _id }).then((res) => {
+      await axios.delete(`/advertisement/${_id}`).then((res) => {
+        console.log(res.data,"deletedelete");
         getData();
         message.success("Sucessfully Delete a Category");
       });

@@ -28,7 +28,7 @@ const ProfileMenu = () => {
       label: (
         <>
           {!toggle ? (
-            <Link to="/login" >
+            <Link to="/login">
               <span>LogIn</span>
             </Link>
           ) : (
@@ -43,14 +43,6 @@ const ProfileMenu = () => {
     {
       key: "2",
       label: (
-        <Link to="/advertisement">
-          <span>Post</span>
-        </Link>
-      ),
-    },
-    {
-      key: "3",
-      label: (
         <Link to="/advertisementDetail">
           <span>Ads Manager</span>
         </Link>
@@ -59,7 +51,13 @@ const ProfileMenu = () => {
   ];
   return (
     <>
-      <Space direction="vertical">
+      <Space direction="horizontal">
+        <Link to="/advertisement">
+          <Button type="primary">
+            <span> Advertisement</span>
+          </Button>
+        </Link>
+
         <Dropdown
           menu={{
             items,
@@ -67,7 +65,7 @@ const ProfileMenu = () => {
           placement="bottomLeft"
         >
           <Button type="primary">
-            <span style={{ fontSize: 12 }}> Hello, sign in</span>Account & Lists
+            <span> Account</span>
           </Button>
         </Dropdown>
       </Space>

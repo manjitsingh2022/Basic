@@ -1,17 +1,6 @@
-import {
-  Button,
-  Card,
-  Col,
-  Form,
-  Input,
-  message,
-  Modal,
-  Row,
-  Select,
-  Upload,
-} from "antd";
+import { Button, Col, Form, Input, message, Row, Select, Upload } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../../../api/axios";
 import { FormWrap } from "../../../shared/commonStyle";
@@ -23,39 +12,54 @@ export const Advertisement = () => {
   const [fileList, setFileList] = useState([]);
   const [form] = Form.useForm();
   const [isSucces, setSuccess] = useState(null);
+  const [selectCatgory, setSelectCatgory] = useState([]);
+  console.log("selectCatgory", selectCatgory);
+  const getData = async () => {
+    try {
+      await axios.get("/categories").then((response) => {
+        setSelectCatgory(response?.data?.response);
+        console.log("categories", response?.data?.response);
+      });
+    } catch (error) {
+      message.error("Select category error");
+    }
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+
   const newPostAdd = () => {
     setLoaderUploadFile(true);
     form.validateFields().then(async (val) => {
       try {
-        // console.log("images",val.image.file.name)
         const formData = new FormData();
         formData.append("user_file", fileList[0]);
-        // console.log('test data', appendfile,'filelist', fileList[0])
         const res = await axios.post("/upload", formData);
         console.log("response", res);
         if (res.data.success === true) {
           setSuccess("Image upload successfully");
           message.success("Image upload successfully");
         }
-       
-        const { name, description, image } = val;
+
+        const { name, description, image, category } = val;
         const payload = {
           name: name ? name : "",
           description: description ? description : "",
+          category: category ? category : "",
           image: image.file.name ? image.file.name : "",
         };
-        console.log(payload, "userkey");
+
         const response = await axios.post(`/advertisement`, payload);
         if (response) {
           message.success("Successfully  new Advertisement!");
           setPost();
         }
-        navigate(`/`);
       } catch (error) {
         console.log("Error while Advertisement", error);
         message.error("something went wrong while Advertisement!");
       } finally {
         setLoaderUploadFile(false);
+        navigate(`/home`);
       }
     });
   };
@@ -74,6 +78,12 @@ export const Advertisement = () => {
     fileList,
   };
   if (!post) return;
+
+  const newArray = selectCatgory.map((item) => ({
+    value: item.category,
+    label: item.category,
+  }));
+  console.log("newArray", newArray);
 
   return (
     <>
@@ -123,6 +133,32 @@ export const Advertisement = () => {
                   ]}
                 >
                   <Input placeholder="Provide a short description" />
+                </Form.Item>
+                <Form.Item
+                  labelCol={{ span: 24 }}
+                  label="Category"
+                  name="category"
+                  rules={[
+                    { required: true, message: "Please select Category!" },
+                  ]}
+                >
+                  <Select
+                    showSearch
+                    style={{
+                      width: 200,
+                    }}
+                    placeholder="Search to Select"
+                    optionFilterProp="children"
+                    filterOption={(input, option) =>
+                      (option?.label ?? "").includes(input)
+                    }
+                    filterSort={(optionA, optionB) =>
+                      (optionA?.label ?? "")
+                        .toLowerCase()
+                        .localeCompare((optionB?.label ?? "").toLowerCase())
+                    }
+                    options={newArray}
+                  />
                 </Form.Item>
               </Col>
             </Row>

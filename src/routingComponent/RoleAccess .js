@@ -12,17 +12,17 @@ const RoutingComponents = () => {
     console.log("roles",roles)
     return !roles.length || roles.includes(role?.role)
       ? <Outlet />
-      : <Navigate to="/unauthorized"  />;
+      : <Navigate to="*"  />;
   };
   return (
     <>
 
 <Route path="/" element={<LayoutComponents />}>
   <Route element={<RoleAccess roles={["ROLE_USER","ROLE_ADMIN"]} />}>
-    <Route path="/home" element={<Home />} />
+    <Route path="/" element={<Home />} />
   </Route>
   <Route element={<RoleAccess roles={["ROLE_ADMIN"]} />}>
-    <Route path="/category" element={<CategoryUser />} />
+    <Route path="/" element={<CategoryUser />} />
   </Route>
 </Route>
     </>

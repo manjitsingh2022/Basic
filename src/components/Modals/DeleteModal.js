@@ -1,5 +1,5 @@
 import { Modal } from 'antd';
-import React, { useState } from 'react';
+import React from 'react';
 const DeleteModal = ({ open,  handleCancel, handleOk ,loading}) => {
   return (
     <>

@@ -1,25 +1,26 @@
-import React from "react";
-import { Checkbox, Space } from "antd";
-
+import React, { useState } from "react";
+import { Checkbox, Space ,Typography} from "antd";
+const { Title } = Typography;
 const CheckBoxFilter = ({ categoryList,searchItems}) => {
-  console.log("categoryList222",categoryList)
-  const onChange = (value) => {
-    console.log("value.category",value.category)
-    if (value.category === "category") {
+ const [category,setCategory]=useState('')
+ 
+ const onChange = (item) => {
+    console.log("category",item.category)
+    if (item.category === "category") {
 
-    const updateList = categoryList?.filter((x)=>x.value === value.name)
+    const updateList = categoryList?.filter((x)=>x === item)
     searchItems(updateList)
     console.log("updatelList",updateList)
     }
-    console.log(value.category,"itemitem")
   };
   return (
     <>
+     <Title level={5}>Categories</Title>
       <Space direction="vertical">
         {categoryList.map((item,index) => {
           return (
             <>
-              <Checkbox key={index} value={item} onChange={(e) => onChange(e.target.value)} >
+              <Checkbox key={index} value={item} onClick={(e) => onChange(item)} >
                 {item.category}
               </Checkbox>
             </>

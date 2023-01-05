@@ -1,7 +1,7 @@
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Col, Form, Input, message, Row, Typography } from "antd";
 import axios from "../../api/axios";
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { LogWrap } from "../../shared/commonStyle";
 import { useNavigate } from "react-router-dom";
 const { Title } = Typography;
@@ -26,8 +26,8 @@ const LogIn = () => {
             localStorage.setItem("userkey", userId);
             console.log("userId", userId);
             const UserRole = response?.data?.roles;
-            localStorage.setItem("rolekey",UserRole)
-            console.log("roles",UserRole)
+            localStorage.setItem("rolekey", UserRole);
+            console.log("roles", UserRole);
             const Usercategory = response?.data?.category;
             localStorage.setItem(
               "categorykey",

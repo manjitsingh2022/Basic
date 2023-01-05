@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { LogWrap } from "../../shared/commonStyle";
 import { useNavigate } from "react-router-dom";
 const { Title } = Typography;
-const RegisterForm = ({}) => {
+const RegisterNow = () => {
   const [register, setRegister] = useState(false);
   let navigate = useNavigate();
   const [form] = Form.useForm();
@@ -22,7 +22,6 @@ const RegisterForm = ({}) => {
             console.log("response", response);
             message.success("Successfully saved data register.");
             navigate(`/login`);
-            window.location.reload(false);
           });
         } catch (error) {
           message.error("Login Error!");
@@ -41,9 +40,7 @@ const RegisterForm = ({}) => {
   //     navigate(`/`);
   //   }
   // })
-  const toSign = () => {
-    navigate(`/login`);
-  };
+ 
 
   return (
     <Row>
@@ -194,4 +191,4 @@ const RegisterForm = ({}) => {
     </Row>
   );
 };
-export default RegisterForm;
+export default RegisterNow;

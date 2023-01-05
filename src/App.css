@@ -37,28 +37,27 @@
   }
 }
 
-.colorWhite{
-  color:#fff !important;
+.colorWhite {
+  color: #fff !important;
 }
-.color-black{
-color: black !important;
+.color-black {
+  color: black !important;
 }
-.color-grey{
-color: #b1a49c !important;
+.color-grey {
+  color: #b1a49c !important;
 }
-.ant-menu-dark .ant-menu-item > span > a:hover{
+.ant-menu-dark .ant-menu-item > span > a:hover {
   color: rgb(0, 0, 0) !important;
 }
-.ant-menu-dark.ant-menu-horizontal > .ant-menu-item:hover  {
-  background-color:  #fff!important;
+.ant-menu-dark.ant-menu-horizontal > .ant-menu-item:hover {
+  background-color: #fff !important;
 }
-.ant-menu.ant-menu-dark .ant-menu-item-selected{
-  background-color:   #bd61fb !important;
+.ant-menu.ant-menu-dark .ant-menu-item-selected {
+  background-color: #bd61fb !important;
   color: #000000 !important;
 }
-.metaCustom{
+.metaCustom {
   justify-content: center !important;
- 
 }
 .customer--address {
   display: block;
@@ -68,4 +67,25 @@ color: #b1a49c !important;
   text-overflow: ellipsis;
 }
 
-.formCustom .ant-form-item-label > label { color: #fff !important;}
+.formCustom .ant-form-item-label > label {
+  color: #fff !important;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.greenColor {
+  color: green !important;
+}
+.redColor {
+  color: red !important;
+}
