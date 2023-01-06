@@ -3,7 +3,7 @@ import { Avatar, Col, Layout, Menu, Row } from "antd";
 import { Header } from "antd/lib/layout/layout";
 import React, { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
-import ProfileMenu from "../pages/profileMenu/index.js";
+import ProfileMenu from "./profileMenu/index.js";
 // import { SideMenu } from "../routingComponent/SideMenu";
 import { PageWrap } from "../shared/commonStyle";
 // import lifelogo from "../assets/lifelogo.png";
@@ -29,7 +29,6 @@ const LayoutComponents = () => {
     },
   ];
   const user = localStorage.getItem("rolekey");
-  console.log("useruser", user);
   useEffect(() => {
     if (user === "ROLE_ADMIN") {
       setValue(navs.filter((item) => item.key === "admin"));
