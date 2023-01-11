@@ -2,7 +2,7 @@ import {  message } from "antd";
 import React, { useEffect, useState } from "react";
 import axios from "../../api/axios";
 import CategorySeclect from "./CategorySeclect";
-import AdvertisementList from "./components/AdvertisementList";
+import AdvertisementList from "./components/CheckBoxFilter/AdvertisementList";
 export const Home = () => {
   const [selectCatgory, setSelectCatgory] = useState([]);
 const [categorie,setCategory]=useState(true)
@@ -34,6 +34,7 @@ const [categorie,setCategory]=useState(true)
     <>
       {/* first time user login and choice a category */}
       {!userCategory?  <CategorySeclect categoryList={selectCatgory} /> : null}
+
       <AdvertisementList  categoryList={selectCatgory} />
     </>
   );

@@ -5,7 +5,7 @@
   
   body {
     margin: 0;
-    font-family: Arial;
+    /* font-family: Arial; */
   }
   
   .header {
@@ -46,10 +46,6 @@
       max-width: 100%;
     }
   }
-  
-  
-  
-  
   .detailsBlock-3-1-1 {
     border: none;
     padding: 0.5vmax;
@@ -59,3 +55,11 @@
     font: 400 0.8vmax "Roboto";
     color: rgba(0, 0, 0, 0.74);
   }
+  .cardMeta .ant-card-body{
+    padding: 7px;
+}
+  .cardMeta .ant-card-meta{
+    display: inline;
+    /* text-align:center; */
+    margin: -4px 0;
+}

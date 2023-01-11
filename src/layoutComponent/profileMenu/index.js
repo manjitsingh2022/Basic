@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Button, Dropdown, message, Space } from "antd";
+import { Button, Dropdown, Input, message, Space } from "antd";
 import { Link, useNavigate } from "react-router-dom";
+import { AudioOutlined } from "@ant-design/icons";
+const { Search } = Input;
 const ProfileMenu = () => {
   const [toggle, setToggle] = useState("");
   useEffect(() => {
@@ -22,6 +24,15 @@ const ProfileMenu = () => {
     navigate("/login");
     setToggle(false);
   };
+  const suffix = (
+    <AudioOutlined
+      style={{
+        fontSize: 16,
+        color: "#1890ff",
+      }}
+    />
+  );
+  const onSearch = (value) => console.log(value);
   const items = [
     {
       key: "1",
@@ -57,7 +68,14 @@ const ProfileMenu = () => {
             <span> Advertisement</span>
           </Button>
         </Link>
-
+        {/* <Search
+          style={{ verticalAlign: "middle" }}
+          placeholder="input search text"
+          enterButton="Search"
+          size="middle"
+          suffix={suffix}
+          onSearch={onSearch}
+        /> */}
         <Dropdown
           menu={{
             items,

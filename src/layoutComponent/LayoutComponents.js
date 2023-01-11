@@ -8,14 +8,12 @@ import ProfileMenu from "./profileMenu/index.js";
 import { PageWrap } from "../shared/commonStyle";
 // import lifelogo from "../assets/lifelogo.png";
 const { Content, Footer } = Layout;
-
 const LayoutComponents = () => {
   const [value, setValue] = useState([]);
   const navs = [
     {
       label: "Home",
       path: "/",
-      key: "user",
     },
     {
       label: "About",
@@ -24,7 +22,7 @@ const LayoutComponents = () => {
     },
     {
       label: "Category",
-      path: "/home",
+      path: "/category",
       key: "admin",
     },
   ];
@@ -42,7 +40,7 @@ const LayoutComponents = () => {
       <Layout>
         <Header
           style={{
-            position: "sticky",
+            position: "fixed",
             zIndex: 1,
             width: "100%",
           }}
@@ -72,7 +70,6 @@ const LayoutComponents = () => {
         </Header>
         <Content>
           <div
-            className="site-layout-background"
             style={{
               minHeight: "100vh",
               color: "#000",

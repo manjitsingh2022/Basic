@@ -8,7 +8,7 @@ import LogIn from "./components/signIn/LogIn";
 import CategoryUser from "./pages/category/CategoryUser";
 import About from "./pages/about/About";
 import AdvertisementDetail from "./components/Admin/advertisementDetail";
-import AdvertisementDetailProduct from "./pages/home/components/AdvertisementDetailProduct";
+import AdvertisementDetailProduct from "./pages/home/components/CheckBoxFilter/AdvertisementDetailProduct";
 import RegisterNow from "./components/signIn/RegisterForm";
 // import { RequireAuth } from "./routingComponent/RequireAuth";
 const App = () => {
@@ -16,16 +16,16 @@ const App = () => {
   return (
     <>
       <Routes>
-       
         {/* If the user doesn't have access to the page the redirect this route. */}
         <Route path="*" element={<NotFound />} />
         <Route path="/signup" element={<RegisterNow />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/" element={<LayoutComponents />}>
-        <Route path="/advertisement" element={<Advertisement />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/advertisement" element={<Advertisement />} />
           {rolekey === "ROLE_ADMIN" ? (
             <>
-              <Route path="/" element={<CategoryUser />} />
+              <Route path="/category" element={<CategoryUser />} />
               <Route
                 path="/advertisementDetail"
                 element={<AdvertisementDetail />}
@@ -33,16 +33,13 @@ const App = () => {
             </>
           ) : (
             <>
-              <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
-
               <Route
                 path="/advertisement/:id"
                 element={<AdvertisementDetailProduct />}
               />
             </>
           )}
-        
         </Route>
       </Routes>
     </>

@@ -1,11 +1,10 @@
 import { Card, Carousel, Col, List, Rate, Row } from "antd";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "../../../api/axios";
+import axios from "../../../../api/axios";
 import { ShareAltOutlined, SearchOutlined } from "@ant-design/icons";
 import Input from "antd/lib/input/Input";
-// import './style.css';
-import "./style.css";
+import './style.css';
 const contentStyle = {
   margin: 0,
   height: "160px",
@@ -71,6 +70,8 @@ const AdvertisementDetailProduct = () => {
                   src={`http://localhost:8080/${data.image}`}
                   style={{
                     width: "100%",
+                    height: "100%",
+                    objectFit:"cover"
                   }}
                 />
               </div>

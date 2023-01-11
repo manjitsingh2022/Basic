@@ -1,2 +1,2 @@
 export {Home}from "./Home"
-export {Advertisement}from"./components/Advertisement"
+export {Advertisement}from"./components/CheckBoxFilter/Advertisement"

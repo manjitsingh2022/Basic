@@ -58,10 +58,10 @@ const CategorySeclect = ({ categoryList }) => {
         onCancel={onCancel}
         footer={[
           <>
-            <Button key={"Cancel"} danger type="primary" onClick={onCancel}>
+            <Button key={"Cancel"} danger type="primary" onClick={onCancel} >
               Cancel
             </Button>
-            <Button  key="submit" type="primary" onClick={handleOk}>
+            <Button  key="submit" type="primary" onClick={handleOk}  >
               Ok
             </Button>
           </>

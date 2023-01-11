@@ -12,6 +12,7 @@
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-infinite-scroll-component": "^6.1.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
@@ -45,6 +46,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy":"http://localhost:8080"
- 
+  "proxy": "http://localhost:8080"
 }

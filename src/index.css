@@ -11,3 +11,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.root{
+  background: "white";
+ 
+  @media (max-width: 1920px) {
+    background: "red";
+  }
+ }
+
+ .ant-menu-dark.ant-menu-horizontal > .ant-menu-item{
+ background-color: rgb(255, 0, 0)  !important;
+ }
+
+ 

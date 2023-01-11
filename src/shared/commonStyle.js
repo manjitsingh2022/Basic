@@ -24,7 +24,7 @@ import styled from "styled-components";
 // } from "antd";
 import { COLORS, /* siteThemeColors */ } from "./color";
 export const PageWrap = styled.div`
-  padding: 20px 20px 20px 20px;
+  padding: 66px 0px 20px 0px;
   // background: ${COLORS.backgroundDark};
   min-height : 100vh; 
   // height: 100%;
@@ -60,4 +60,10 @@ display: flex;
 border-radius: calc(0.1 * 100px);
 box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.38);
 justify-content: space-evenly;
+`;
+export const StyledCard = styled.div`
+  
+  // white-space: nowrap;
+  overflow: hidden;
+  padding: 0;
 `;

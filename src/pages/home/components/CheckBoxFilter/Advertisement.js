@@ -2,8 +2,8 @@ import { Button, Col, Form, Input, message, Row, Select, Upload } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "../../../api/axios";
-import { FormWrap } from "../../../shared/commonStyle";
+import axios from "../../../../api/axios";
+import { FormWrap } from "../../../../shared/commonStyle";
 
 export const Advertisement = () => {
   const navigate = useNavigate();
@@ -59,7 +59,7 @@ export const Advertisement = () => {
         message.error("something went wrong while Advertisement!");
       } finally {
         setLoaderUploadFile(false);
-        navigate(`/home`);
+        navigate(`/`);
       }
     });
   };
@@ -119,7 +119,7 @@ export const Advertisement = () => {
                     loading={isSucces}
                     // disabled={!isSucces}
                   >
-                    <Button icon={<UploadOutlined />}>Click to Upload</Button>
+                    <Button icon={<UploadOutlined />}>Upload</Button>
                   </Upload>
                 </Form.Item>
               </Col>
