@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Button, Dropdown, Input, message, Space } from "antd";
+import { Button, Dropdown, message, Space } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-import { AudioOutlined } from "@ant-design/icons";
-const { Search } = Input;
 const ProfileMenu = () => {
   const [toggle, setToggle] = useState("");
   useEffect(() => {
@@ -24,15 +22,7 @@ const ProfileMenu = () => {
     navigate("/login");
     setToggle(false);
   };
-  const suffix = (
-    <AudioOutlined
-      style={{
-        fontSize: 16,
-        color: "#1890ff",
-      }}
-    />
-  );
-  const onSearch = (value) => console.log(value);
+
   const items = [
     {
       key: "1",
@@ -52,9 +42,9 @@ const ProfileMenu = () => {
     },
 
     {
-      key: "2",
+      key: "admin",
       label: (
-        <Link to="/advertisementDetail">
+        <Link to="/advertisementDetail" >
           <span>Ads Manager</span>
         </Link>
       ),

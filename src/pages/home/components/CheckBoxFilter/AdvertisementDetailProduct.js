@@ -2,16 +2,17 @@ import { Card, Carousel, Col, List, Rate, Row } from "antd";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "../../../../api/axios";
-import { ShareAltOutlined, SearchOutlined } from "@ant-design/icons";
+import { ShareAltOutlined } from "@ant-design/icons";
 import Input from "antd/lib/input/Input";
-import './style.css';
-const contentStyle = {
+import "./style.css";
+const CarouselimgStyle = {
   margin: 0,
-  height: "160px",
+  height: "300px",
   color: "#fff",
   lineHeight: "160px",
-  textAlign: "center",
-  background: "#364d79",
+  background: "#fff",
+  objectFit: "scale-down",
+  display: "inline-block",
 };
 const AdvertisementDetailProduct = () => {
   const [data, setData] = useState([]);
@@ -38,7 +39,7 @@ const AdvertisementDetailProduct = () => {
           </div>
         </>
       ),
-      content: <p>{data.description}</p>,
+      content: <p className="cardMetap">{data.description}</p>,
     },
   ];
   const onChange = (currentSlide) => {
@@ -54,25 +55,16 @@ const AdvertisementDetailProduct = () => {
           lg: 32,
         }}
       >
-        <Col span={16}>
-          {/* <Card
-           
-            hoverable
-            cover={
-              <img alt="images" src={`http://localhost:8080/${data.image}`} />
-            }
-          ></Card> */}
-          <div>
-            <Carousel afterChange={onChange}>
-              <div style={contentStyle}>
+        <Col span={16} >
+         
+          <div style={{textAlign:"center"}}>
+            <Carousel afterChange={onChange}  >
+              <div >
                 <img
+                  style={CarouselimgStyle}
                   alt="images"
                   src={`http://localhost:8080/${data.image}`}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit:"cover"
-                  }}
+                  
                 />
               </div>
             </Carousel>
@@ -107,10 +99,10 @@ const AdvertisementDetailProduct = () => {
           </div>
         </Col>
         <Col span={8} className="column">
-          <List 
+          <List
             dataSource={cardsDisplay}
             renderItem={(item) => (
-              <List.Item style={{ display: "contents" }} >
+              <List.Item style={{ display: "contents" }}>
                 <Card title={item.title} bordered={false}>
                   {item.content}
                 </Card>

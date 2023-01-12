@@ -1,0 +1,5 @@
+.siderStyle{
+    flex-direction: none !important;
+    float: right !important;
+    flex-direction: column-reverse !important;
+}

@@ -6,6 +6,7 @@ import { Link, Outlet } from "react-router-dom";
 import ProfileMenu from "./profileMenu/index.js";
 // import { SideMenu } from "../routingComponent/SideMenu";
 import { PageWrap } from "../shared/commonStyle";
+import SildeBar from "../components/Admin/component/sildeBar.js";
 // import lifelogo from "../assets/lifelogo.png";
 const { Content, Footer } = Layout;
 const LayoutComponents = () => {
@@ -22,7 +23,7 @@ const LayoutComponents = () => {
     },
     {
       label: "Category",
-      path: "/category",
+      path: "/",
       key: "admin",
     },
   ];
@@ -43,6 +44,7 @@ const LayoutComponents = () => {
             position: "fixed",
             zIndex: 1,
             width: "100%",
+            webkitUserModify: "read-write-plaintext-only",
           }}
         >
           <div className="logo" />
@@ -68,6 +70,7 @@ const LayoutComponents = () => {
             </Col>
           </Row>
         </Header>
+
         <Content>
           <div
             style={{
@@ -76,13 +79,16 @@ const LayoutComponents = () => {
               background: "#F5F5F5",
             }}
           >
-            <Row>
-              <Col span={20} offset={2}>
-                <PageWrap>
+            <PageWrap>
+              <Row>
+                <Col span={3}>
+                  <SildeBar />
+                </Col>
+                <Col span={21}>
                   <Outlet />
-                </PageWrap>
-              </Col>
-            </Row>
+                </Col>
+              </Row>
+            </PageWrap>
           </div>
         </Content>
         <Footer

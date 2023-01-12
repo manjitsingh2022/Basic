@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Button, message, Space, Table } from "antd";
 import axios from "../../api/axios";
-import {  DeleteOutlined } from "@ant-design/icons";
+import {  DeleteOutlined,EditOutlined } from "@ant-design/icons";
+import EditAdvertisementDetail from "./component/editAdvertisementDetail";
 const AdvertisementDetail = () => {
   const [adsRecord, setAdsRecord] =useState([]);
+  const [showModalEdit, setShowModalEdit] = useState(false);
+  const [showModalRecord, setShowModalRecord] = useState(false);
+
   // console.log("adsRecord", adsRecord);
   const getData = async () => {
     try {
@@ -20,6 +24,7 @@ const AdvertisementDetail = () => {
     getData();
   }, []);
 
+ 
   const onConfirmDelete = async (_id) => {
     console.log("delete",_id)
     try {
@@ -54,13 +59,13 @@ const AdvertisementDetail = () => {
         return (
           <Space direction="horizontal">
             <>
-              {/* <Button  key="submit" type="primary" onClick={() => onCategoryEdit(record)}>
+              <Button  key="submit" type="primary" onClick={() => onCategoryEdit(record)}>
                 <EditOutlined
                   style={{
                     width: 20,
                   }}
                 />
-              </Button> */}
+              </Button>
               <Button
                key="cancel"
                 type="primary"
@@ -79,10 +84,25 @@ const AdvertisementDetail = () => {
       },
     },
   ];
-
+  const onCategoryEdit = (record) => {
+    console.log("onCategoryEdit", record);
+    setShowModalRecord(record);
+    setShowModalEdit(true);
+  };
+  const onComfirmEdit = async () => {
+    setShowModalEdit(false);
+  };
   return (
     <>
       <Table dataSource={adsRecord} columns={columns} />
+      <EditAdvertisementDetail
+        // loading={loading}
+        open={showModalEdit}
+        categoryRecord={showModalRecord}
+        handleCancel={() => setShowModalEdit(false)}
+        handleOk={onComfirmEdit}
+        getData={getData}
+      />
     </>
   );
 };

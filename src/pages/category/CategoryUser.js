@@ -1,12 +1,33 @@
-import { Button, Col, Form, Input, message, Row, Space, Table } from "antd";
+import {
+  Layout,
+  Menu,
+  theme,
+  Button,
+  Col,
+  Form,
+  Input,
+  message,
+  Row,
+  Space,
+  Table,
+} from "antd";
+import {
+  EditOutlined, DeleteOutlined,
+  UploadOutlined,
+  UserOutlined,
+  VideoCameraOutlined,
+} from "@ant-design/icons";
 import axios from "../../api/axios";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 // import { useParams } from 'react-router';
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { MonthDayYearFormat } from "../../shared/constants";
 import EditCategory from "./EditCategory";
 import DeleteModal from "../../components/Modals/DeleteModal";
+import "./style.css";
+// import { Link } from "react-router-dom";
+// const { Sider } = Layout;
+
 // import SelectCategory from "../home/CategorySeclect";
 const CategoryUser = () => {
   // const params = useParams();
@@ -147,24 +168,20 @@ const CategoryUser = () => {
         return (
           <Space direction="horizontal">
             <>
-              <Button  key="submit" type="primary" onClick={() => onCategoryEdit(record)}>
-                <EditOutlined
-                  style={{
-                    width: 20,
-                  }}
-                />
+              <Button
+                key="submit"
+                type="primary"
+                onClick={() => onCategoryEdit(record)}
+              >
+                <EditOutlined />
               </Button>
               <Button
-               key="cancel"
+                key="cancel"
                 type="primary"
                 danger
                 onClick={() => onCategoryDelete(record._id)}
               >
-                <DeleteOutlined
-                  style={{
-                    width: 20,
-                  }}
-                />
+                <DeleteOutlined />
               </Button>
             </>
           </Space>
@@ -172,57 +189,98 @@ const CategoryUser = () => {
       },
     },
   ];
+
   return (
     <>
-      <Form form={form} className="category-form" autoComplete="off">
-        <Row justify="space-evenly">
-          <Col span={8}>
-            <Form.Item
-              className="colorWhite"
-              name="category"
-              // label="Category"
-              rules={[{ required: true, message: "Category is required" }]}
-            >
-              <Input type="text" placeholder="Category" />
-            </Form.Item>
-          </Col>
-          <Col span={4}>
-            <Button
-              // loading={submiting}
-              type="primary"
-              htmlType="submit"
-              className="category-form-button"
-              onClick={() => onFormSubmit()}
-              block
-            >
-              Submit
-            </Button>
-          </Col>
-        </Row>
-      </Form>
+      <Row gutter={[16, 16]}>
+        {/* <Col span={4}>
+          <Layout className="siderStyle">
+            <Sider  >
+              <Menu
+                theme="dark"
+                mode="inline"   
+                defaultSelectedKeys={["1"]}
+                items={[
+                  {
+                    key: "1",
+                    icon: <UserOutlined />,
+                    label: (
+                      <Link to="/" >
+                      <span>Category</span>
+                    </Link>
+                     
+                    ),
+                  },
+                  {
+                    key: "2",
+                    icon: <VideoCameraOutlined />,
+                    label: (
+                      <Link to="/advertisementDetail" >
+                        <span>Ads Manager</span>
+                      </Link>
+                    ),
+                  },
+                  {
+                    key: "3",
+                    icon: <UploadOutlined />,
+                    label: "nav 3",
+                  },
+                ]}
+              />
+            </Sider>
+          </Layout>
+        </Col> */}
+        <Col span={20}>
+          <Form form={form} className="category-form" autoComplete="off">
+            <Row justify="space-evenly">
+              <Col span={8}>
+                <Form.Item
+                  className="colorWhite"
+                  name="category"
+                  // label="Category"
+                  rules={[{ required: true, message: "Category is required" }]}
+                >
+                  <Input type="text" placeholder="Category" />
+                </Form.Item>
+              </Col>
+              <Col span={4}>
+                <Button
+                  // loading={submiting}
+                  type="primary"
+                  htmlType="submit"
+                  className="category-form-button"
+                  onClick={() => onFormSubmit()}
+                  block
+                >
+                  Submit
+                </Button>
+              </Col>
+            </Row>
+          </Form>
 
-      <DeleteModal
-        loading={loading}
-        open={showModalDelete}
-        handleCancel={() => setShowModalDelete(false)}
-        handleOk={onConfirmDelete}
-      />
+          <DeleteModal
+            loading={loading}
+            open={showModalDelete}
+            handleCancel={() => setShowModalDelete(false)}
+            handleOk={onConfirmDelete}
+          />
 
-      <Table
-        value={data}
-        loading={loading}
-        dataSource={category}
-        columns={columns}
-      />
-      <EditCategory
-        loading={loading}
-        open={showModalEdit}
-        categoryRecord={showModalRecord}
-        handleCancel={() => setShowModalEdit(false)}
-        handleOk={onComfirmEdit}
-        getData={getData}
-      />
-
+          <EditCategory
+            loading={loading}
+            open={showModalEdit}
+            categoryRecord={showModalRecord}
+            handleCancel={() => setShowModalEdit(false)}
+            handleOk={onComfirmEdit}
+            getData={getData}
+          />
+          <Table
+            value={data}
+            loading={loading}
+            dataSource={category}
+            columns={columns}
+          />
+        </Col>
+      </Row>
       {/* <SelectCategory categoryList={category} /> */}
     </>
   );

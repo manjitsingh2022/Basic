@@ -24,12 +24,12 @@ import styled from "styled-components";
 // } from "antd";
 import { COLORS, /* siteThemeColors */ } from "./color";
 export const PageWrap = styled.div`
-  padding: 66px 0px 20px 0px;
+  padding: 63px 0px 20px 36px;
   // background: ${COLORS.backgroundDark};
   min-height : 100vh; 
   // height: 100%;
   width: 100%;
-  
+  position: sticky;
 `;
 export const HeaderWrap = styled.div`
   font-family: Roboto;

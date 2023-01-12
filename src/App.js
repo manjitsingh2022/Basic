@@ -21,11 +21,10 @@ const App = () => {
         <Route path="/signup" element={<RegisterNow />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/" element={<LayoutComponents />}>
-          <Route path="/" element={<Home />} />
           <Route path="/advertisement" element={<Advertisement />} />
           {rolekey === "ROLE_ADMIN" ? (
             <>
-              <Route path="/category" element={<CategoryUser />} />
+              <Route path="/" element={<CategoryUser />} />
               <Route
                 path="/advertisementDetail"
                 element={<AdvertisementDetail />}
@@ -33,11 +32,12 @@ const App = () => {
             </>
           ) : (
             <>
-              <Route path="/about" element={<About />} />
+              <Route path="/" element={<Home />} />
               <Route
                 path="/advertisement/:id"
                 element={<AdvertisementDetailProduct />}
               />
+              <Route path="/about" element={<About />} />
             </>
           )}
         </Route>

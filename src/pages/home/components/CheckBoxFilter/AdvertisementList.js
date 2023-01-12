@@ -26,10 +26,13 @@ const AdvertisementList = ({ categoryList }) => {
   const style = {
     background: "#0092ff",
     padding: "8px 0",
+    display: "block",
+    flex: "0 0 50%",
+    maxidth: "25%",
   };
   // const dispatch = useDispatch();
   // const [list, setList] = useState([]);
-  const [list, setList] = useState(Array({ length: 4 }));
+  const [list, setList] = useState(Array({ length: 4,hasMore: true }));
   console.log("items", Array({ length: 8 }));
   // useEffect(() => {
   //   console.log(Array.from({ length: 8 }), "itemsitems");
@@ -101,9 +104,14 @@ const AdvertisementList = ({ categoryList }) => {
     }
   };
   const fetchMoreData = () => {
-    setList(list.concat(Array({ length: 4 })));
-    console.log("length",Array({length:4}))
+    //   // a fake async api call like which sends
+    //   // 20 more records in 1.5 secs
+    setTimeout(() => {
+      setList(list.concat(Array({ length: 4 })));
+    }, 500);
+    console.log("length", Array({ length: 4 }));
   };
+
   return (
     <>
       <Row
@@ -136,15 +144,27 @@ const AdvertisementList = ({ categoryList }) => {
           </div>
         </Col>
         <Col span={19}>
-          {/* <Row gutter={[16, { xs: 8, sm: 16, md: 24, lg: 32 }]}>
-            {(filterList === null ? list : filterList).map((items, index) => {
-              return (
-                <>
-                  <Col span={6}>
-                    <div>
+          <div id="scrollableDiv" style={{ height: 500, overflow: "auto" }}>
+            <InfiniteScroll
+              dataLength={list.length}
+              next={fetchMoreData}
+              hasMore={list.hasMore}
+              loader={<h4>Loading...</h4>}
+              scrollableTarget="scrollableDiv"
+              endMessage={
+                <p style={{ textAlign: "center" }}>
+                  <b>Yay! You have seen it all</b>
+                </p>
+              }
+            >
+              <Row gutter={[24, 24]}>
+                {(filterList === null ? list : filterList).map(
+                  (items, index) => (
+                    <Col span={6}>
                       <Link key={index} to={`/advertisement/${items._id}`}>
                         <StyledCard>
-                          <Card  className="cardMeta"
+                          <Card
+                            className="cardMeta"
                             size="default"
                             hoverable
                             cover={
@@ -158,16 +178,15 @@ const AdvertisementList = ({ categoryList }) => {
                                 actions={[
                                   <GithubOutlined key="github" type="link">
                                     <Tag>
-                                  <a href="https://ant.design/components/card/"></a>
-                                </Tag>
+                                      <a href="https://ant.design/components/card/"></a>
+                                    </Tag>
                                   </GithubOutlined>,
                                   <LinkOutlined key="link" href="" />,
                                 ]}
                               />
                             }
                           >
-                            <Meta 
-                           
+                            <Meta
                               avatar={
                                 <Avatar
                                   src={`http://localhost:8080/${items.image}`}
@@ -179,86 +198,13 @@ const AdvertisementList = ({ categoryList }) => {
                           </Card>
                         </StyledCard>
                       </Link>
-                    </div>
-                  </Col>
-                </>
-              );
-            })}
-          </Row> */}
-
-          <Row gutter={[16, 16]}>
-            <div
-              id="scrollableDiv"
-              style={{ height: "100%", overflowY: 'hidden' }}
-            >
-              <InfiniteScroll
-                dataLength={list.length}
-                next={fetchMoreData}
-                // hasMore={list.hasMore}
-                hasMore={list.length < 100}
-                // loader={<h4>Loading...</h4>}
-                scrollableTarget="scrollableDiv"
-                style={{ display: "flex" }}
-                height="100%"
-                endMessage={
-                  <p style={{ textAlign: "center" }}>
-                    <b>Yay! You have seen it all</b>
-                  </p>
-                }
-              >
-                {(filterList === null ? list : filterList).map(
-                  (items, index) => {
-                    console.log("items", items);
-                    return (
-                      <>
-                       <Col span={6}>
-                        <Link key={index} to={`/advertisement/${items._id}`}>
-                          <StyledCard>
-                            <Card
-                              className="cardMeta"
-                              size="default"
-                              hoverable
-                              cover={
-                                <img
-                                  alt="images"
-                                  style={{
-                                    maxHeight: 150,
-                                    minHeight: 150,
-                                  }}
-                                  src={`http://localhost:8080/${items.image}`}
-                                  // actions={[
-                                  //   <GithubOutlined key="github" type="link">
-                                  //     <Tag>
-                                  //   <a href="https://ant.design/components/card/"></a>
-                                  // </Tag>
-                                  //   </GithubOutlined>,
-                                  //   <LinkOutlined key="link" href="" />,
-                                  // ]}
-                                />
-                              }
-                            >
-                              <Meta
-                                style={{width: "100%",
-                                padding: "5px 16px 8px"}}
-                                avatar={
-                                  <Avatar
-                                    src={`http://localhost:8080/${items.image}`}
-                                  />
-                                }
-                                title={items.name}
-                                description={<p>{items.description}</p>}
-                              />
-                            </Card>
-                          </StyledCard>
-                        </Link>
+                      {/* </div> */}
                     </Col>
-                      </>
-                    );
-                  }
+                  )
                 )}
-              </InfiniteScroll>
-            </div>
-          </Row>
+              </Row>
+            </InfiniteScroll>
+          </div>
         </Col>
       </Row>
     </>
@@ -266,4 +212,3 @@ const AdvertisementList = ({ categoryList }) => {
 };
 
 export default AdvertisementList;
-
