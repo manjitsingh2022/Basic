@@ -7,7 +7,7 @@ export const Home = () => {
   const [selectCatgory, setSelectCatgory] = useState([]);
   const [categorie, setCategory] = useState(true);
   console.log("categorie", categorie);
-
+  
   const userCategory = localStorage.getItem("categorykey");
   const roleCategory = localStorage.getItem("rolekey");
   useEffect(() => {
@@ -15,6 +15,7 @@ export const Home = () => {
       setCategory(false);
     }
      else if(!userCategory) {
+
       setCategory(true);
     }
      if (roleCategory === "ROLE_ADMIN") {
@@ -39,7 +40,7 @@ export const Home = () => {
   return (
     <>
       {/* first time user login and choice a category */}
-      {categorie ? <CategorySeclect categoryList={selectCatgory} /> : null}
+      { categorie ? <CategorySeclect categoryList={selectCatgory} /> : null}
 
       <AdvertisementList categoryList={selectCatgory} />
     </>

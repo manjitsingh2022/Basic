@@ -41,23 +41,23 @@ const ProfileMenu = () => {
       ),
     },
 
-    {
-      key: "admin",
-      label: (
-        <Link to="/advertisementDetail" >
-          <span>Ads Manager</span>
-        </Link>
-      ),
-    },
+    // {
+    //   key: "admin",
+    //   label: (
+    //     <Link to="/advertisementDetail" >
+    //       <span>Ads Manager</span>
+    //     </Link>
+    //   ),
+    // },
   ];
   return (
     <>
       <Space direction="horizontal">
-        <Link to="/advertisement">
+        {/* <Link to="/advertisement">
           <Button type="primary">
             <span> Advertisement</span>
           </Button>
-        </Link>
+        </Link> */}
         {/* <Search
           style={{ verticalAlign: "middle" }}
           placeholder="input search text"

@@ -1,14 +1,14 @@
 import { Avatar, Col, Layout, Menu, Row } from "antd";
 // import Password from "antd/lib/input/Password";
-import { Header } from "antd/lib/layout/layout";
+// import { Header } from "antd/lib/layout/layout";
 import React, { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import ProfileMenu from "./profileMenu/index.js";
 // import { SideMenu } from "../routingComponent/SideMenu";
 import { PageWrap } from "../shared/commonStyle";
-import SildeBar from "../components/Admin/component/sildeBar.js";
+import SildeBar from "../components/SIdeBar/sildeBar.js";
 // import lifelogo from "../assets/lifelogo.png";
-const { Content, Footer } = Layout;
+const { Content, Footer ,Header} = Layout;
 const LayoutComponents = () => {
   const [value, setValue] = useState([]);
   const navs = [
@@ -22,7 +22,7 @@ const LayoutComponents = () => {
       key: "user",
     },
     {
-      label: "Category",
+      // label: "Category",
       path: "/",
       key: "admin",
     },
@@ -82,9 +82,9 @@ const LayoutComponents = () => {
             <PageWrap>
               <Row>
                 <Col span={3}>
-                  <SildeBar />
+                  <SildeBar/>
                 </Col>
-                <Col span={21}>
+                <Col span={21} style={{marginTop:40}}>
                   <Outlet />
                 </Col>
               </Row>

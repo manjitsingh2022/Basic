@@ -7,7 +7,7 @@ import NotFound from "./pages/notFound";
 import LogIn from "./components/signIn/LogIn";
 import CategoryUser from "./pages/category/CategoryUser";
 import About from "./pages/about/About";
-import AdvertisementDetail from "./components/Admin/advertisementDetail";
+import AdvertisementDetail from "./components/AdminSection/advertisementDetail";
 import AdvertisementDetailProduct from "./pages/home/components/CheckBoxFilter/AdvertisementDetailProduct";
 import RegisterNow from "./components/signIn/RegisterForm";
 // import { RequireAuth } from "./routingComponent/RequireAuth";
@@ -24,7 +24,7 @@ const App = () => {
           <Route path="/advertisement" element={<Advertisement />} />
           {rolekey === "ROLE_ADMIN" ? (
             <>
-              <Route path="/" element={<CategoryUser />} />
+              <Route path="/" element={<CategoryUser />}  />
               <Route
                 path="/advertisementDetail"
                 element={<AdvertisementDetail />}
