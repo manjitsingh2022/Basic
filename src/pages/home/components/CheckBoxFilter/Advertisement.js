@@ -1,4 +1,15 @@
-import { Button, Col, Form, Input, message, Row, Select, Upload } from "antd";
+import {
+  AutoComplete,
+  Button,
+  Col,
+  Dropdown,
+  Form,
+  Input,
+  message,
+  Row,
+  Select,
+  Upload,
+} from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +24,32 @@ export const Advertisement = () => {
   const [form] = Form.useForm();
   const [isSucces, setSuccess] = useState(null);
   const [selectCatgory, setSelectCatgory] = useState([]);
-  console.log("selectCatgory", selectCatgory);
+  const [options, setOptions] = useState([{ value: "", label: "" }]);
+
+  const handleSearch = async (value) => {
+    try {
+      await axios.get(`/getlocation?city=${value}`).then((response) => {
+        console.log("location", response);
+        const valueLocation = response?.data?.data.map((value) => {
+          return {
+            key:value._id,
+            value: value.city,
+            label: value.city,
+          };
+        });
+        setOptions(valueLocation);
+      });
+      console.log("first", options);
+      console.log(value, "dfdfdfdfdf");
+    } catch (error) {
+      message.error("location getlocation error");
+    }
+  };
+
+  const onSelect = (value) => {
+    console.log("onSelectvalue", value);
+  };
+
   const getData = async () => {
     try {
       await axios.get("/categories").then((response) => {
@@ -24,6 +60,7 @@ export const Advertisement = () => {
       message.error("Select category error");
     }
   };
+
   useEffect(() => {
     getData();
   }, []);
@@ -35,17 +72,18 @@ export const Advertisement = () => {
         const formData = new FormData();
         formData.append("user_file", fileList[0]);
         const res = await axios.post("/upload", formData);
-        console.log("response", res);
+        console.log("response upload", res);
         if (res.data.success === true) {
           setSuccess("Image upload successfully");
           message.success("Image upload successfully");
         }
 
-        const { name, description, image, category } = val;
+        const { name, description, image, category, location } = val;
         const payload = {
           name: name ? name : "",
           description: description ? description : "",
           category: category ? category : "",
+          location: location ? location : "",
           image: image.file.name ? image.file.name : "",
         };
 
@@ -56,7 +94,7 @@ export const Advertisement = () => {
         }
       } catch (error) {
         console.log("Error while Advertisement", error);
-        message.error("something went wrong while Advertisement!");
+        message.error("something went wrong while Advertisement!", error);
       } finally {
         setLoaderUploadFile(false);
         navigate(`/`);
@@ -83,7 +121,7 @@ export const Advertisement = () => {
     value: item.category,
     label: item.category,
   }));
-  console.log("newArray", newArray);
+
 
   return (
     <>
@@ -121,6 +159,33 @@ export const Advertisement = () => {
                   >
                     <Button icon={<UploadOutlined />}>Upload</Button>
                   </Upload>
+                </Form.Item>
+                <Form.Item
+                  labelCol={{ span: 24 }}
+                  label="Location"
+                  name="location"
+                  rules={[
+                    { required: true, message: "Please select location!" },
+                  ]}
+                >
+                  <AutoComplete
+                    dropdownMatchSelectWidth={252}
+                    style={{
+                      width: 250,
+                    }}
+                    options={options}
+                    onSelect={onSelect}
+                    onSearch={handleSearch}
+                    filterOption={(options, option) =>
+                      option.value.toUpperCase().indexOf(options.toUpperCase()) !== -1
+                    }
+                  >
+                    <Input.Search
+                      size="large"
+                      placeholder="input here"
+                      enterButton
+                    />
+                  </AutoComplete>
                 </Form.Item>
               </Col>
               <Col span={12}>

@@ -13,11 +13,11 @@ const SildeBar = () => {
   const rolekey = localStorage.getItem("rolekey");
   return (
     <>
-      <Layout className="siderStyle">
+      <Layout className="siderStyle" >
       {/* // ****************AdminsideBar********** */}
         {rolekey === "ROLE_ADMIN" ? (
-          <Sider>
-            <Menu
+          <Sider style={{marginTop:62}}>
+            <Menu 
               theme="dark"
               mode="inline"
               defaultSelectedKeys={["1"]}

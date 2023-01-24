@@ -1,9 +1,10 @@
 import React from 'react'
+import CollectionCard from './component/CollectionCard';
 
 const About = () => {
   return (
     <>
-    ddgd dfasfkhffasfksfasjkfjka
+  <CollectionCard/>
     </>
   )
 }

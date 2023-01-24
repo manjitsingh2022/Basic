@@ -32,10 +32,10 @@ const AdvertisementList = ({ categoryList }) => {
   };
   // const dispatch = useDispatch();
   // const [list, setList] = useState([]);
-  const [list, setList] = useState(Array({ length: 4,hasMore: true }));
+  const [list, setList] = useState(Array({ length: 4, hasMore: true }));
   console.log("items", Array({ length: 8 }));
   // useEffect(() => {
-  //   console.log(Array.from({ length: 8 }), "itemsitems");
+  // console.log(Array.from({ length: 8 }), "itemsitems");
   // }, []);
 
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
@@ -46,6 +46,7 @@ const AdvertisementList = ({ categoryList }) => {
     console.log("categoryList list main", list);
     console.log("checkked ", checkedValues.target.checked);
     console.log("checkked value", checkedValues.target.value.category);
+
     let rowKeys = [...selectedRowKeys];
     if (checkedValues.target.checked) {
       rowKeys = [...selectedRowKeys, checkedValues.target.value.category];
@@ -66,29 +67,23 @@ const AdvertisementList = ({ categoryList }) => {
 
   // useEffect(() => {
   //   console.log("selectedRowKeys", selectedRowKeys);
-
   // }, [selectedRowKeys]);
   // useEffect(() => {
   //   console.log("setFilterList", filterList);
-
   // }, [filterList]);
-
   const getData = async () => {
     try {
       await axios.get("/advertisements").then((response) => {
         setList(response?.data?.response);
-
         console.log("response", response);
       });
     } catch (error) {
       message.error("Select category error");
     }
   };
-
   useEffect(() => {
     getData();
   }, [categoryList]);
-
   const searchItems = (value) => {
     console.log("value", value);
     if (value == "") {
@@ -111,7 +106,6 @@ const AdvertisementList = ({ categoryList }) => {
     }, 500);
     console.log("length", Array({ length: 4 }));
   };
-
   return (
     <>
       <Row

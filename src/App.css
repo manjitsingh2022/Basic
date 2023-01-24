@@ -172,7 +172,9 @@ a:hover{
       font-size: 1.3rem !important;
   }
 }
-
+.ant-layout-header{
+  line-height: 30px !important;
+}
 
 @media screen and (max-width:1000px){
   .stats-container{

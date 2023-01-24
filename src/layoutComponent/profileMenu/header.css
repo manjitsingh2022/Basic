@@ -1,0 +1,18 @@
+.searchbar {
+  height: 63px;
+  flex: 1;
+  border-radius: 50px;
+  align-items: center;
+  display: flex;
+}
+.headerItem{
+display:flex;
+color: white;
+}
+.headerItem>p{
+    margin: 10px;
+}
+.headerAction{
+    display: flex;
+    /* background-color:crimson; */
+}

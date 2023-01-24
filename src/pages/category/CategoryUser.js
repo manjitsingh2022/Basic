@@ -1,7 +1,4 @@
 import {
-  Layout,
-  Menu,
-  theme,
   Button,
   Col,
   Form,
@@ -13,9 +10,6 @@ import {
 } from "antd";
 import {
   EditOutlined, DeleteOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
 } from "@ant-design/icons";
 import axios from "../../api/axios";
 import moment from "moment";
@@ -193,43 +187,7 @@ const CategoryUser = () => {
   return (
     <>
       <Row gutter={[16, 16]}>
-        {/* <Col span={4}>
-          <Layout className="siderStyle">
-            <Sider  >
-              <Menu
-                theme="dark"
-                mode="inline"   
-                defaultSelectedKeys={["1"]}
-                items={[
-                  {
-                    key: "1",
-                    icon: <UserOutlined />,
-                    label: (
-                      <Link to="/" >
-                      <span>Category</span>
-                    </Link>
-                     
-                    ),
-                  },
-                  {
-                    key: "2",
-                    icon: <VideoCameraOutlined />,
-                    label: (
-                      <Link to="/advertisementDetail" >
-                        <span>Ads Manager</span>
-                      </Link>
-                    ),
-                  },
-                  {
-                    key: "3",
-                    icon: <UploadOutlined />,
-                    label: "nav 3",
-                  },
-                ]}
-              />
-            </Sider>
-          </Layout>
-        </Col> */}
+        
         <Col span={20}>
           <Form form={form} className="category-form" autoComplete="off">
             <Row justify="space-evenly">
@@ -281,7 +239,6 @@ const CategoryUser = () => {
           />
         </Col>
       </Row>
-      {/* <SelectCategory categoryList={category} /> */}
     </>
   );
 };

@@ -24,11 +24,10 @@ import styled from "styled-components";
 // } from "antd";
 import { COLORS, /* siteThemeColors */ } from "./color";
 export const PageWrap = styled.div`
-  padding: 63px 0px 20px 36px;
-  // background: ${COLORS.backgroundDark};
+  padding: 70px 0px 20px 20px;
   min-height : 100vh; 
-  // height: 100%;
   width: 100%;
+  // margin-top:64px;
   position: sticky;
 `;
 export const HeaderWrap = styled.div`

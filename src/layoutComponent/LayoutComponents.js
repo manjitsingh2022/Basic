@@ -8,7 +8,7 @@ import ProfileMenu from "./profileMenu/index.js";
 import { PageWrap } from "../shared/commonStyle";
 import SildeBar from "../components/SIdeBar/sildeBar.js";
 // import lifelogo from "../assets/lifelogo.png";
-const { Content, Footer ,Header} = Layout;
+const { Content, Footer, Header, Sider } = Layout;
 const LayoutComponents = () => {
   const [value, setValue] = useState([]);
   const navs = [
@@ -38,59 +38,66 @@ const LayoutComponents = () => {
 
   return (
     <>
+    
       <Layout>
         <Header
           style={{
             position: "fixed",
             zIndex: 1,
             width: "100%",
-            webkitUserModify: "read-write-plaintext-only",
+            // webkitUserModify: "read-write-plaintext-only",
           }}
         >
-          <div className="logo" />
-          <Row>
-            <Col span={12}>
-              <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["/"]}>
-                <Link to="/">
-                  <Avatar
-                    src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-                    size="large"
-                  />
-                </Link>
-                {console.log(value, "valuevalue")}
-                {value.map((nav) => (
-                  <Menu.Item key={nav.path}>
-                    <Link to={nav.path}>{nav.label}</Link>
-                  </Menu.Item>
-                ))}
-              </Menu>
-            </Col>
-            <Col span={12} style={{ textAlign: "end" }}>
-              <ProfileMenu />
-            </Col>
+          <Row justify="space-between">
+            <Menu
+              theme="dark"
+              mode="horizontal"
+              defaultSelectedKeys={["/"]}
+              style={{ margin: 13 }}
+            >
+              <Link to="/">
+                <Avatar
+                  src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                  size="large"
+                />
+              </Link>
+              {console.log(value, "valuevalue")}
+              {value.map((nav) => (
+                <Menu.Item key={nav.path}>
+                  <Link to={nav.path}>{nav.label}</Link>
+                </Menu.Item>
+              ))}
+            </Menu>
+            <div>
+
+            <ProfileMenu />
+            </div>
           </Row>
         </Header>
-
-        <Content>
-          <div
-            style={{
-              minHeight: "100vh",
-              color: "#000",
-              background: "#F5F5F5",
-            }}
-          >
-            <PageWrap>
-              <Row>
-                <Col span={3}>
-                  <SildeBar/>
-                </Col>
-                <Col span={21} style={{marginTop:40}}>
-                  <Outlet />
-                </Col>
-              </Row>
-            </PageWrap>
-          </div>
-        </Content>
+        <Layout>
+          {user === "ROLE_ADMIN" ? (
+            <Sider>
+              <SildeBar />
+            </Sider>
+          ) : null}
+          <Layout>
+            <Content>
+              <div
+                style={{
+                  minHeight: "100vh",
+                  color: "#000",
+                  background: "#F5F5F5",
+                }}
+              >
+                <Row>
+                  <PageWrap>
+                    <Outlet />
+                  </PageWrap>
+                </Row>
+              </div>
+            </Content>
+          </Layout>
+        </Layout>
         <Footer
           style={{
             textAlign: "center",

@@ -21,13 +21,13 @@ export const Home = () => {
      if (roleCategory === "ROLE_ADMIN") {
       setCategory(false);
     }
-  }, []);
+  }, [categorie,roleCategory,userCategory]);
 
   const getData = async () => {
     try {
       await axios.get("/categories").then((response) => {
         setSelectCatgory(response?.data?.response);
-        console.log("catss", response?.data?.response);
+        console.log("categories", response?.data?.response);
       });
     } catch (error) {
       message.error("Select category error");

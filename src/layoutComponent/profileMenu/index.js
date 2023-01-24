@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Button, Dropdown, message, Space } from "antd";
 import { Link, useNavigate } from "react-router-dom";
+import { SearchResults } from "./search/SearchResults ";
+import {
+  HomeOutlined
+} from '@ant-design/icons';
+import "./header.css"
 const ProfileMenu = () => {
   const [toggle, setToggle] = useState("");
   useEffect(() => {
@@ -41,31 +46,24 @@ const ProfileMenu = () => {
       ),
     },
 
-    // {
-    //   key: "admin",
-    //   label: (
-    //     <Link to="/advertisementDetail" >
-    //       <span>Ads Manager</span>
-    //     </Link>
-    //   ),
-    // },
   ];
   return (
     <>
-      <Space direction="horizontal">
-        {/* <Link to="/advertisement">
-          <Button type="primary">
-            <span> Advertisement</span>
-          </Button>
-        </Link> */}
-        {/* <Search
-          style={{ verticalAlign: "middle" }}
-          placeholder="input search text"
-          enterButton="Search"
-          size="middle"
-          suffix={suffix}
-          onSearch={onSearch}
-        /> */}
+      <Space direction="horizontal" >
+        <div className="searchbar">
+
+      <SearchResults />
+        </div>
+
+        {/* <div className="headerItem">
+          <p>item</p>
+          <p>item</p>
+          <p>item</p>
+        </div>
+        <div className="headerAction">
+        <HomeOutlined  style={{color:"white",fontSize:20}} />
+        </div> */}
+        <div className="headerButton">
         <Dropdown
           menu={{
             items,
@@ -76,6 +74,9 @@ const ProfileMenu = () => {
             <span> Account</span>
           </Button>
         </Dropdown>
+        </div>
+       
+
       </Space>
     </>
   );
