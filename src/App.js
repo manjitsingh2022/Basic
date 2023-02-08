@@ -19,11 +19,13 @@ const App = () => {
       <Routes>
         <Route path="/signup" element={<RegisterNow />} />
         <Route path="/login" element={<LogIn />} />
+
         {userToken ? (
           <>
             {/* If the user doesn't have access to the page the redirect this route. */}
             <Route path="*" element={<NotFound />} />
             <Route path="/" element={<LayoutComponents />}>
+           
               <Route path="/advertisement" element={<Advertisement />} />
               {rolekey === "ROLE_ADMIN" ? (
                 <>
@@ -46,6 +48,8 @@ const App = () => {
             </Route>
           </>
         ) : null}
+         {/* // Optional index route if no nested routes match */}
+    
       </Routes>
     </>
   );

@@ -61,7 +61,6 @@ const LayoutComponents = () => {
                   size="large"
                 />
               </Link>
-              {console.log(value, "valuevalue")}
               {value.map((nav) => (
                 <Menu.Item key={nav.path}>
                   <Link to={nav.path}>{nav.label}</Link>

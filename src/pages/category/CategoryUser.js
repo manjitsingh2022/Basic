@@ -38,7 +38,6 @@ const CategoryUser = () => {
   const getData = () => {
     axios.get("/categories").then((response) => {
       setCategory(response?.data.response);
-      console.log("catss", response?.data?.response);
     });
   };
 

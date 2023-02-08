@@ -8,12 +8,12 @@ const reducer = combineReducers({
   products: ProductsReducers,
 });
 
-let initialState = { };
+// let initialState = { };
 const middleware = [thunk];
 
 const store = legacy_createStore(
   reducer,
-  initialState,
+  // initialState,
   composeWithDevTools(applyMiddleware(...middleware))
 );
 

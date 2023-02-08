@@ -6,7 +6,7 @@ import AdvertisementList from "./components/CheckBoxFilter/AdvertisementList";
 export const Home = () => {
   const [selectCatgory, setSelectCatgory] = useState([]);
   const [categorie, setCategory] = useState(true);
-  console.log("categorie", categorie);
+  // console.log("categorie", categorie);
   
   const userCategory = localStorage.getItem("categorykey");
   const roleCategory = localStorage.getItem("rolekey");
@@ -27,7 +27,6 @@ export const Home = () => {
     try {
       await axios.get("/categories").then((response) => {
         setSelectCatgory(response?.data?.response);
-        console.log("categories", response?.data?.response);
       });
     } catch (error) {
       message.error("Select category error");

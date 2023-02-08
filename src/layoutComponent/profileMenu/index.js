@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Button, Dropdown, message, Space } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { SearchResults } from "./search/SearchResults ";
-import {
-  HomeOutlined
-} from '@ant-design/icons';
-import "./header.css"
+import "./header.css";
+import LocationSearch from "./locationSearch/LocationSearch";
 const ProfileMenu = () => {
   const [toggle, setToggle] = useState("");
   useEffect(() => {
@@ -45,38 +43,31 @@ const ProfileMenu = () => {
         </>
       ),
     },
-
   ];
   return (
     <>
-      <Space direction="horizontal" >
+      <Space direction="horizontal" style={{direction:"ltr"}}>
+        <div className="headerItem">
+         <LocationSearch/>
+        </div>
         <div className="searchbar">
-
-      <SearchResults />
+          <SearchResults />
         </div>
-
-        {/* <div className="headerItem">
-          <p>item</p>
-          <p>item</p>
-          <p>item</p>
-        </div>
-        <div className="headerAction">
+        {/* <div className="headerAction">
         <HomeOutlined  style={{color:"white",fontSize:20}} />
         </div> */}
         <div className="headerButton">
-        <Dropdown
-          menu={{
-            items,
-          }}
-          placement="bottomLeft"
-        >
-          <Button type="primary">
-            <span> Account</span>
-          </Button>
-        </Dropdown>
+          <Dropdown
+            menu={{
+              items,
+            }}
+            placement="bottomLeft"
+          >
+            <Button type="primary">
+              <span> Account</span>
+            </Button>
+          </Dropdown>
         </div>
-       
-
       </Space>
     </>
   );

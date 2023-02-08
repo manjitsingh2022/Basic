@@ -8,6 +8,7 @@
 .headerItem{
 display:flex;
 color: white;
+direction: ltr !important;
 }
 .headerItem>p{
     margin: 10px;
@@ -16,3 +17,4 @@ color: white;
     display: flex;
     /* background-color:crimson; */
 }
+

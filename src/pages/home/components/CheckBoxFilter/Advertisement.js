@@ -2,7 +2,6 @@ import {
   AutoComplete,
   Button,
   Col,
-  Dropdown,
   Form,
   Input,
   message,
@@ -24,19 +23,23 @@ export const Advertisement = () => {
   const [form] = Form.useForm();
   const [isSucces, setSuccess] = useState(null);
   const [selectCatgory, setSelectCatgory] = useState([]);
-  const [options, setOptions] = useState([{ value: "", label: "" }]);
-
+  const [options, setOptions] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  const [latlon, setLatlon] = useState([]);
   const handleSearch = async (value) => {
     try {
       await axios.get(`/getlocation?city=${value}`).then((response) => {
         console.log("location", response);
         const valueLocation = response?.data?.data.map((value) => {
           return {
-            key:value._id,
+            key: value._id,
             value: value.city,
             label: value.city,
+            lat: value.lat,
+            lng: value.lng,
           };
         });
+
         setOptions(valueLocation);
       });
       console.log("first", options);
@@ -46,15 +49,16 @@ export const Advertisement = () => {
     }
   };
 
-  const onSelect = (value) => {
-    console.log("onSelectvalue", value);
+  const onSelect = (value, option) => {
+    console.log("onSelectvalue", option);
+    setLatlon(option);
+    setInputValue(option.label);
   };
 
   const getData = async () => {
     try {
       await axios.get("/categories").then((response) => {
         setSelectCatgory(response?.data?.response);
-        console.log("categories", response?.data?.response);
       });
     } catch (error) {
       message.error("Select category error");
@@ -78,20 +82,22 @@ export const Advertisement = () => {
           message.success("Image upload successfully");
         }
 
-        const { name, description, image, category, location } = val;
+        const { name, description, image, category } = val;
+
+        console.log(latlon, "latlon");
         const payload = {
           name: name ? name : "",
           description: description ? description : "",
           category: category ? category : "",
-          location: location ? location : "",
+          address: { lat: latlon.lat, lng: latlon.lng },
           image: image.file.name ? image.file.name : "",
         };
-
         const response = await axios.post(`/advertisement`, payload);
         if (response) {
           message.success("Successfully  new Advertisement!");
           setPost();
         }
+        console.log("payloaddd", payload);
       } catch (error) {
         console.log("Error while Advertisement", error);
         message.error("something went wrong while Advertisement!", error);
@@ -121,7 +127,6 @@ export const Advertisement = () => {
     value: item.category,
     label: item.category,
   }));
-
 
   return (
     <>
@@ -155,7 +160,7 @@ export const Advertisement = () => {
                     // beforeUpload={uploadFile}
                     // fileList={isSucces}
                     loading={isSucces}
-                    // disabled={!isSucces}
+                    // disabled={!isSucces?fileList:null}
                   >
                     <Button icon={<UploadOutlined />}>Upload</Button>
                   </Upload>
@@ -169,6 +174,7 @@ export const Advertisement = () => {
                   ]}
                 >
                   <AutoComplete
+                    value={inputValue}
                     dropdownMatchSelectWidth={252}
                     style={{
                       width: 250,
@@ -176,8 +182,10 @@ export const Advertisement = () => {
                     options={options}
                     onSelect={onSelect}
                     onSearch={handleSearch}
-                    filterOption={(options, option) =>
-                      option.value.toUpperCase().indexOf(options.toUpperCase()) !== -1
+                    filterOption={(inputValue, option) =>
+                      option.label
+                        .toUpperCase()
+                        .indexOf(inputValue.toUpperCase()) !== -1
                     }
                   >
                     <Input.Search

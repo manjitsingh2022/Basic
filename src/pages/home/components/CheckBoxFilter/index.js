@@ -5,12 +5,12 @@ const CheckBoxFilter = ({ categoryList,searchItems}) => {
  const [category,setCategory]=useState('')
  
  const onChange = (item) => {
-    console.log("category",item.category)
+    // console.log("category",item.category)
     if (item.category === "category") {
 
     const updateList = categoryList?.filter((x)=>x === item)
     searchItems(updateList)
-    console.log("updatelList",updateList)
+    // console.log("updatelList",updateList)
     }
   };
   return (

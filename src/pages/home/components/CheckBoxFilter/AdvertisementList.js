@@ -1,51 +1,52 @@
-import {
-  Avatar,
-  Card,
-  Checkbox,
-  Col,
-  Input,
-  message,
-  Row,
-  Space,
-  Tag,
-  /*  Tag, */ Typography,
-} from "antd";
+import { Avatar, Card, Checkbox, Col, Input, Row, Space, Tag } from "antd";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // import { getProduct } from "../../../reactRedux/actions/productAction";
 // import { useDispatch } from "react-redux";
-import axios from "../../../../api/axios";
 import { GithubOutlined, LinkOutlined } from "@ant-design/icons";
 import Title from "antd/lib/typography/Title";
 import "./style.css";
 import { StyledCard } from "../../../../shared/commonStyle";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { UseGlobalContext } from "../../../../context/AppProvider";
 const { Meta } = Card;
-const { Text } = Typography;
 const AdvertisementList = ({ categoryList }) => {
-  const style = {
-    background: "#0092ff",
-    padding: "8px 0",
-    display: "block",
-    flex: "0 0 50%",
-    maxidth: "25%",
-  };
+  // console.log(categoryList, "categoryList");
+const data = UseGlobalContext();
+  const { hits, address } = UseGlobalContext();
+  console.log(address, "address");
+  console.log(hits, "listHits");
+
+  // console.log(data, "data");
   // const dispatch = useDispatch();
   // const [list, setList] = useState([]);
-  const [list, setList] = useState(Array({ length: 4, hasMore: true }));
-  console.log("items", Array({ length: 8 }));
-  // useEffect(() => {
-  // console.log(Array.from({ length: 8 }), "itemsitems");
-  // }, []);
-
+  const [addressValue, setAddressValue] = useState({});
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [filterList, setFilterList] = useState(null);
+  const [list, setList] = useState(Array({ length: 4, hasMore: true }));
+  console.log("addressValue", addressValue);
 
+  useEffect(() => {
+    console.log("preitem address goes", address);
+    // console.log('hits goes', hits)
+    console.log("addressValue goes", addressValue);
+    if (hits.length > 0) {
+      const data = hits.filter((item, index) => {
+        if (item.address && item.address != undefined) {
+          console.log("addressssssss",address.lat , address.lng)
+           return item.address.lat === address.lat && item.address.lng === address.lng 
+          }
+      });
+      console.log("pre test", data);
+      setList(data)
+    }
+  }, [address]);
+ 
   const onCheck = (checkedValues) => {
-    console.log("categoryList main", categoryList);
-    console.log("categoryList list main", list);
-    console.log("checkked ", checkedValues.target.checked);
-    console.log("checkked value", checkedValues.target.value.category);
+    // console.log("categoryList main", categoryList);
+    // console.log("categoryList list main", list);
+    // console.log("checkked ", checkedValues.target.checked);
+    // console.log("checkked value", checkedValues.target.value.category);
 
     let rowKeys = [...selectedRowKeys];
     if (checkedValues.target.checked) {
@@ -53,46 +54,34 @@ const AdvertisementList = ({ categoryList }) => {
     } else {
       rowKeys.splice(selectedRowKeys.indexOf(checkedValues.target.value), 1);
     }
-    console.log("rowKeys", rowKeys);
+    // console.log("rowKeys", rowKeys);
     setSelectedRowKeys(rowKeys);
 
     if (rowKeys.length > 0) {
       const newval = list.filter((ite) => rowKeys.includes(ite.category));
-      console.log("newval", newval);
+      // console.log("newval", newval);
       setFilterList(newval);
     } else {
       setFilterList(null);
     }
   };
 
-  // useEffect(() => {
-  //   console.log("selectedRowKeys", selectedRowKeys);
-  // }, [selectedRowKeys]);
-  // useEffect(() => {
-  //   console.log("setFilterList", filterList);
-  // }, [filterList]);
-  const getData = async () => {
-    try {
-      await axios.get("/advertisements").then((response) => {
-        setList(response?.data?.response);
-        console.log("response", response);
-      });
-    } catch (error) {
-      message.error("Select category error");
-    }
-  };
   useEffect(() => {
-    getData();
-  }, [categoryList]);
+    if(!address){
+      setList(hits);
+      setAddressValue(address);
+    }
+  }, [categoryList, hits]);
+
   const searchItems = (value) => {
-    console.log("value", value);
-    if (value == "") {
-      getData();
+    // console.log("value", value);
+    if (value === "") {
+      return list;
     } else if (value) {
       const filteredData = list?.filter((item) =>
         item.name.toLowerCase().includes(value)
       );
-      console.log("searchTerms", filteredData);
+      // console.log("searchTerms", filteredData);
       setList(filteredData);
     } else {
       console.log("value", value);
@@ -104,7 +93,7 @@ const AdvertisementList = ({ categoryList }) => {
     setTimeout(() => {
       setList(list.concat(Array({ length: 4 })));
     }, 500);
-    console.log("length", Array({ length: 4 }));
+    // console.log("length", Array({ length: 4 }));
   };
   return (
     <>
@@ -152,6 +141,7 @@ const AdvertisementList = ({ categoryList }) => {
               }
             >
               <Row gutter={[24, 24]}>
+                {/* {hits?.map( */}
                 {(filterList === null ? list : filterList).map(
                   (items, index) => (
                     <Col span={6}>
