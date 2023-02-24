@@ -7,7 +7,7 @@ import "./CollectionCard";
 const CollectionCard = () => {
   const { hits, page, isloading, removePost } = UseGlobalContext();
 
-  console.log("first", hits, "page", page);
+  console.log("page", page);
   if (isloading) {
     return <Loading />;
   }

@@ -3,7 +3,10 @@ import { Button, message, Space, Switch, Table } from "antd";
 import axios from "../../api/axios";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import EditAdvertisementDetail from "./component/editAdvertisementDetail";
+import { UseGlobalContext } from "../../context/AppProvider";
 const AdvertisementDetail = () => {
+  const data = UseGlobalContext()
+  console.log(data,'data')
   const [adsRecord, setAdsRecord] = useState([]);
   const [showModalEdit, setShowModalEdit] = useState(false);
   const [showModalRecord, setShowModalRecord] = useState(false);

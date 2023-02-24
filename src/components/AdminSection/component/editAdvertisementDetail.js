@@ -1,4 +1,4 @@
-import { Button, Form, Input, message, Modal, Switch } from "antd";
+import { Button, Form, Input, message, Modal, Select, Switch } from "antd";
 // import axios from "axios";
 import moment from "moment";
 import React, { useEffect } from "react";
@@ -13,8 +13,11 @@ const EditAdvertisementDetail = ({
   // loading,
   getData,
 }) => {
+
+
   const { id } = useParams();
   const [form] = Form.useForm();
+  
   useEffect(() => {
     if (categoryRecord) {
       form.setFieldsValue({
@@ -24,6 +27,7 @@ const EditAdvertisementDetail = ({
           ? categoryRecord.description
           : "",
         category: categoryRecord.category ? categoryRecord.category : "",
+        city: categoryRecord.city ? categoryRecord.city : "",
         status: categoryRecord.status ? categoryRecord.status : "",
         createdDate: categoryRecord.createdDate
           ? categoryRecord.createdDate
@@ -36,11 +40,12 @@ const EditAdvertisementDetail = ({
     form.validateFields().then(async (val) => {
       console.log("values", val);
       try {
-        const { name, description, category, status } = val;
+        const { name, description, category, status ,city} = val;
         const payload = {
           _id: categoryRecord["_id"],
           // _id: record._id,
           name: name,
+          city: city,
           category: category,
           description: description,
           status: status ? status : false,
@@ -99,6 +104,9 @@ const EditAdvertisementDetail = ({
 
           <Form.Item labelCol={{ span: 24 }} name="category" label="category">
             <Input placeholder={""} />
+          </Form.Item>
+          <Form.Item labelCol={{ span: 24 }} name="city" label="city">
+         
           </Form.Item>
 
           {/* <Form.Item labelCol={{ span: 24 }} name="createdDate" label="Date">

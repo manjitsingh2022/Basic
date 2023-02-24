@@ -63,7 +63,7 @@ const LocationSearch = () => {
         }
       >
         <Input.Search
-          value={address}
+          value={inputValue}
           size="large"
           placeholder=" Search city"
         />

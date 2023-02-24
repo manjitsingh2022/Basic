@@ -1,4 +1,4 @@
-import { Avatar, Col, Layout, Menu, Row } from "antd";
+import { Avatar, Layout, Menu, Row } from "antd";
 // import Password from "antd/lib/input/Password";
 // import { Header } from "antd/lib/layout/layout";
 import React, { useEffect, useState } from "react";
@@ -38,7 +38,6 @@ const LayoutComponents = () => {
 
   return (
     <>
-    
       <Layout>
         <Header
           style={{
@@ -68,8 +67,7 @@ const LayoutComponents = () => {
               ))}
             </Menu>
             <div>
-
-            <ProfileMenu />
+              <ProfileMenu />
             </div>
           </Row>
         </Header>

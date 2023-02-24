@@ -9,10 +9,12 @@ const initialState = {
   isloading: true,
   name: "",
   address: "",
+  city: "",
   nbHits: 0,
   nbPages: 0,
   page: 0,
   hits: [],
+
 };
 const AppProvider = ({ children }) => {
   //   const [state, setState] = useState(initialState);
@@ -65,9 +67,9 @@ const AppProvider = ({ children }) => {
 
   useEffect(() => {
     getData(
-      `${API}?name=${state.name}&page=${state.page}&city=${state.address}`
+      `${API}?name=${state.name}&page=${state.page}&address=${state.address}&city=${state.city}`
     );
-  }, [state.name, state.page, state.address]);
+  }, [state.name, state.page, state.address,state.city]);
   return (
     <AppContext.Provider
       value={{

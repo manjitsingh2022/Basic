@@ -14,42 +14,36 @@ import RegisterNow from "./components/signIn/RegisterForm";
 const App = () => {
   const rolekey = localStorage.getItem("rolekey");
   const userToken = localStorage.getItem("token");
+  console.log(window.location, "deeee");
   return (
     <>
       <Routes>
         <Route path="/signup" element={<RegisterNow />} />
         <Route path="/login" element={<LogIn />} />
 
-        {userToken ? (
-          <>
-            {/* If the user doesn't have access to the page the redirect this route. */}
-            <Route path="*" element={<NotFound />} />
-            <Route path="/" element={<LayoutComponents />}>
-           
-              <Route path="/advertisement" element={<Advertisement />} />
-              {rolekey === "ROLE_ADMIN" ? (
-                <>
-                  <Route path="/" element={<CategoryUser />} />
-                  <Route
-                    path="/advertisementDetail"
-                    element={<AdvertisementDetail />}
-                  ></Route>
-                </>
-              ) : (
-                <>
-                  <Route path="/" element={<Home />} />
-                  <Route
-                    path="/advertisement/:id"
-                    element={<AdvertisementDetailProduct />}
-                  />
-                  <Route path="/about" element={<About />} />
-                </>
-              )}
-            </Route>
-          </>
-        ) : null}
-         {/* // Optional index route if no nested routes match */}
-    
+        {/* If the user doesn't have access to the page the redirect this route. */}
+        <Route path="*" element={<NotFound />} />
+        <Route path="/" element={<LayoutComponents />}>
+          <Route path="/advertisement" element={<Advertisement />} />
+          {rolekey === "ROLE_ADMIN" ? (
+            <>
+              <Route path="/" element={<CategoryUser />} />
+              <Route
+                path="/advertisementDetail"
+                element={<AdvertisementDetail />}
+              ></Route>
+            </>
+          ) : (
+            <>
+              <Route path="/" element={<Home />} />
+              <Route
+                path="/advertisement/:id"
+                element={<AdvertisementDetailProduct />}
+              />
+              <Route path="/about" element={<About />} />
+            </>
+          )}
+        </Route>
       </Routes>
     </>
   );
